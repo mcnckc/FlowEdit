@@ -15,7 +15,7 @@ if __name__ == "__main__":
 
     parser = argparse.ArgumentParser()
     parser.add_argument("--device_number", type=int, default=0, help="device number to use")
-    parser.add_argument("--exp_yaml", type=str, default="yaml_files/exp_yamls/exp_cat_FLUX_example.yaml", help="experiment yaml file")
+    parser.add_argument("--exp_yaml", type=str, default="FLUX_exp.yaml", help="experiment yaml file")
 
     args = parser.parse_args()
 
