@@ -27,7 +27,7 @@ Create an experiment file. This file include all the hyperparamaters needed for 
 See `FLUX_exp.yaml` for FLUX usage example and `SD3_exp.yaml` for Stable Diffusion 3 usage example. <br>
 See our paper for discussion on the effect of different hyperparameters and values we used.
 
-Run `python main.py --exp_yaml <path to your experiment yaml>`
+Run `python run_script.py --exp_yaml <path to your experiment yaml>`
 
 
 ## License
