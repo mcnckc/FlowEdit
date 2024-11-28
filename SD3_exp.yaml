@@ -2,7 +2,7 @@
   exp_name: "FlowEdit_SD3"
   dataset_yaml: edits.yaml
   sampler_type: "FlowEditSD3"
-  tot_t_steps: 50
+  T_steps: 50
   n_avg: 1
   src_guidance_scale: 3.5
   tar_guidance_scale: 13.5
