@@ -13,8 +13,9 @@
 ## Installation
 1. Clone the repository
 
-2. Install the required dependencies: `pip install -r requirements.txt`
-	* Tested with CUDA version 12.0 and diffusers 0.21.2
+2. Install the required dependencies using `pip install torch diffusers transformers accelerate sentencepiece protobuf` <br>
+   or using `pip install -r requirements.txt`
+	* Tested with CUDA version 12.4 and diffusers 0.31.0
 
 ## Usage
 
