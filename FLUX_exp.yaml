@@ -1,6 +1,7 @@
 - 
   exp_name: "FlowEdit_FLUX"
   dataset_yaml: edits.yaml
+  model_type: "FLUX"
   sampler_type: "FlowEditFLUX"
   T_steps: 28
   n_avg: 1

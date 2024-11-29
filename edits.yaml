@@ -1,5 +1,5 @@
 -
-    init_img:  example_images/gas_station.png
+    input_img:  example_images/gas_station.png
     source_prompt: A gas station with a white and red sign that
       reads "CAFE" There are several cars parked in front of the gas station, including
       a white car and a van.
@@ -14,7 +14,7 @@
 
 - 
 
-    init_img:  example_images/lighthouse.png
+    input_img:  example_images/lighthouse.png
     source_prompt: The image features a tall white lighthouse standing prominently
       on a hill, with a beautiful blue sky in the background. The lighthouse is illuminated
       by a bright light, making it a prominent landmark in the scene.
