@@ -25,7 +25,7 @@ Run editing with Flux: `python run_script.py --exp_yaml FLUX_exp.yaml`
 
 * Upload images to `example_images` folder. 
 
-* Create an edits file that specifies: (a) a path to the input image, (b) a source prompt, (c) a target prompt, and (d) a target code. The target code summarizes the changes between the source and target prompts and will appear in the output filename. <br>
+* Create an edits file that specifies: (a) a path to the input image, (b) a source prompt, (c) target prompts, and (d) target codes. The target codes summarize the changes between the source and target prompts and will appear in the output filename. <br>
 See `edits.yaml` for example.
 
 * Create an experiment file containing the hyperparamaters needed for running FlowEdit, such as `n_max`, `n_min`. This file also includes the path to the `edits.yaml` file<br>
