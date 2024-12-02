@@ -21,7 +21,7 @@ Run editing with Stable Diffusion 3: `python run_script.py --exp_yaml SD3_exp.ya
 
 Run editing with Flux: `python run_script.py --exp_yaml FLUX_exp.yaml`
 
-## Usage - you own examples
+## Usage - your own examples
 
 * Upload images to `example_images` folder. 
 
