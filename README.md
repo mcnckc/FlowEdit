@@ -14,19 +14,23 @@
 1. Clone the repository
 
 2. Install the required dependencies using `pip install torch diffusers transformers accelerate sentencepiece protobuf` <br>
-   or using `pip install -r requirements.txt`
 	* Tested with CUDA version 12.4 and diffusers 0.31.0
 
-## Usage
+## Running examples
+Run editing with Stable Diffusion 3: `python run_script.py --exp_yaml SD3_exp.yaml`
 
-Upload images to a data folder. 
+Run editing with Flux: `python run_script.py --exp_yaml FLUX_exp.yaml`
 
-Create an edits file that include the path to each image, a source prompt, a traget promt and a target code. The target code summarize the changes between the source and target prompts. <br>
+## Usage - you own examples
+
+* Upload images to `example_images` folder. 
+
+* Create an edits file that specifies: (a) a path to the input image, (b) a source prompt, (c) a target prompt, and (d) a target code. The target code summarizes the changes between the source and target prompts and will appear in the output filename. <br>
 See `edits.yaml` for example.
 
-Create an experiment file. This file include all the hyperparamaters needed for ruuning FlowEdit, such as `n_max`, `n_min`. <br>
+* Create an experiment file containing the hyperparamaters needed for running FlowEdit, such as `n_max`, `n_min`. This file also includes the path to the `edits.yaml` file<br>
 See `FLUX_exp.yaml` for FLUX usage example and `SD3_exp.yaml` for Stable Diffusion 3 usage example. <br>
-See our paper for discussion on the effect of different hyperparameters and values we used.
+For a detailed discussion on the impact of different hyperparameters and the values we used, please refer to our paper.
 
 Run `python run_script.py --exp_yaml <path to your experiment yaml>`
 
