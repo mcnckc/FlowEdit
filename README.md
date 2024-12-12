@@ -4,7 +4,7 @@
 
 # FlowEdit
 
-[Project](https://matankleiner.github.io/flowedit/) | [Arxiv](https://arxiv.org/abs/) 
+[Project](https://matankleiner.github.io/flowedit/) | [Arxiv](https://arxiv.org/abs/2412.08629) 
 
 ### Official Pytorch implementation of the paper: "FlowEdit: Inversion-Free Text-Based Editing Using Pre-Trained Flow Models"
 
