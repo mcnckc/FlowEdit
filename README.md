@@ -43,4 +43,10 @@ This project is licensed under the [MIT License](LICENSE).
 If you use this code for your research, please cite our paper:
 
 ```
+@article{kulikov2024flowedit,
+	title = {FlowEdit: Inversion-Free Text-Based Editing Using Pre-Trained Flow Models},
+	author = {Kulikov, Vladimir and Kleiner, Matan and Huberman-Spiegelglas, Inbar and Michaeli, Tomer},
+	journal = {arXiv preprint arXiv:2412.08629},
+	year = {2024}
+	}
 ```
