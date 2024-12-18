@@ -4,7 +4,7 @@
 
 # FlowEdit
 
-[Project](https://matankleiner.github.io/flowedit/) | [Arxiv](https://arxiv.org/abs/2412.08629) | [Demo](https://huggingface.co/spaces/fallenshock/FlowEdit)
+[Project](https://matankleiner.github.io/flowedit/) | [Arxiv](https://arxiv.org/abs/2412.08629) | [Demo](https://huggingface.co/spaces/fallenshock/FlowEdit) | [ComfyUI](#comfyui-implementation-for-different-models)
 
 ### Official Pytorch implementation of the paper: "FlowEdit: Inversion-Free Text-Based Editing Using Pre-Trained Flow Models"
 
@@ -34,6 +34,13 @@ For a detailed discussion on the impact of different hyperparameters and the val
 
 Run `python run_script.py --exp_yaml <path to your experiment yaml>`
 
+## ComfyUI implementation for different models 
+
+* [FLUX](https://github.com/logtd/ComfyUI-Fluxtapoz)
+* [LTX Video](https://github.com/logtd/ComfyUI-LTXTricks)
+* [HunyuanLoom](https://github.com/logtd/ComfyUI-HunyuanLoom)
+
+Implemented by [logtd](https://x.com/logtdx/status/1869095838016012462?s=48&t=6Yj6BZKooDOmH_JWRWjtHg)
 
 ## License
 This project is licensed under the [MIT License](LICENSE).
