@@ -14,7 +14,8 @@
 1. Clone the repository
 
 2. Install the required dependencies using `pip install torch diffusers transformers accelerate sentencepiece protobuf` <br>
-	* Tested with CUDA version 12.4 and diffusers 0.31.0
+	* New version of diffusers may have compatibility issues, try install `diffusers==0.30.1`
+ 	* Tested with CUDA version 12.4 and diffusers 0.31.0
 
 ## Running examples
 Run editing with Stable Diffusion 3: `python run_script.py --exp_yaml SD3_exp.yaml`
