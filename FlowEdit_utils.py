@@ -214,11 +214,11 @@ def FlowEditSD3(pipe,
                 
             src_tar_latent_model_input = torch.cat([xt_tar, xt_tar, xt_tar, xt_tar]) if pipe.do_classifier_free_guidance else (xt_src, xt_tar)
 
-            _, noise_pred_tar = calc_v_sd3(pipe, src_tar_latent_model_input,src_tar_prompt_embeds, src_tar_pooled_prompt_embeds, src_guidance_scale, tar_guidance_scale, t)
+            _, Vt_tar = calc_v_sd3(pipe, src_tar_latent_model_input,src_tar_prompt_embeds, src_tar_pooled_prompt_embeds, src_guidance_scale, tar_guidance_scale, t)
 
             xt_tar = xt_tar.to(torch.float32)
 
-            prev_sample = xt_tar + (t_im1 - t_im1) * (noise_pred_tar)
+            prev_sample = xt_tar + (t_im1 - t_i) * (Vt_tar)
 
             prev_sample = prev_sample.to(noise_pred_tar.dtype)
 
