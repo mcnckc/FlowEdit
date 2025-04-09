@@ -40,7 +40,7 @@ if __name__ == "__main__":
         raise NotImplementedError(f"Model type {model_type} not implemented")
     #pipe.enable_sequential_cpu_offload()
     pipe.transformer.enable_group_offload(onload_device=device, offload_device=torch.device('cpu'), 
-                                          offload_type="leaf_level", num_blocks_per_group=11, use_stream=True)
+                                          offload_type="block_level", num_blocks_per_group=11, use_stream=True)
     scheduler = pipe.scheduler
     #pipe = pipe.to(device)
 
