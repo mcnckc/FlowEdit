@@ -38,7 +38,7 @@ if __name__ == "__main__":
         pipe = StableDiffusion3Pipeline.from_pretrained("stabilityai/stable-diffusion-3-medium-diffusers", torch_dtype=torch.float16)
     else:
         raise NotImplementedError(f"Model type {model_type} not implemented")
-    
+    pipe.enable_model_cpu_offload()
     scheduler = pipe.scheduler
     pipe = pipe.to(device)
 
