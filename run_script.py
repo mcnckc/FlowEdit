@@ -41,19 +41,20 @@ if __name__ == "__main__":
         raise NotImplementedError(f"Model type {model_type} not implemented")
     #pipe.enable_sequential_cpu_offload()
     #pipe.scheduler = pipe.scheduler.to(device)
-    pipe.text_encoder = pipe.text_encoder.to(device)
-    pipe.text_encoder_2 = pipe.text_encoder_2.to(device)
+    #pipe.text_encoder = pipe.text_encoder.to(device)
+    #pipe.text_encoder_2 = pipe.text_encoder_2.to(device)
     #pipe.tokenizer = pipe.tokenizer.to(device)
     #pipe.tokenizer_2 = pipe.tokenizer_2.to(device)
     #pipe.tokenizer_3 = pipe.tokenizer_3.to(device)
-    pipe.transformer = pipe.transformer.to(device)
-    pipe.vae = pipe.vae.to(device)
-    print("LOADED TO GPU")
+    #pipe.transformer = pipe.transformer.to(device)
+    #pipe.vae = pipe.vae.to(device)
+    
+    pipe.enable_model_cpu_offload()
     apply_group_offloading(pipe.text_encoder_3, onload_device=device, offload_device=torch.device('cpu'), 
                                           offload_type="block_level", num_blocks_per_group=12, use_stream=True)
     scheduler = pipe.scheduler
     #pipe = pipe.to(device)
-
+    print("LOADED TO GPU")
     for exp_dict in exp_configs:
 
         exp_name = exp_dict["exp_name"]
