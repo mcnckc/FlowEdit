@@ -80,6 +80,8 @@ if __name__ == "__main__":
 
             src_prompt = data_dict["source_prompt"]
             tar_prompts = data_dict["target_prompts"]
+            print("SRC:", src_prompt)
+            print("TGT:", tar_prompts)
             negative_prompt =  "" # optionally add support for negative prompts (SD3)
             image_src_path = data_dict["input_img"]
 
@@ -97,7 +99,7 @@ if __name__ == "__main__":
             x0_src = x0_src.to(device)
             
             for tar_num, tar_prompt in enumerate(tar_prompts):
-
+                print("START EDIT")
                 if model_type == 'SD3':
                     x0_tar = FlowEditSD3(pipe,
                                                             scheduler,
@@ -128,7 +130,7 @@ if __name__ == "__main__":
                 else:
                     raise NotImplementedError(f"Sampler type {model_type} not implemented")
 
-
+                print("DONE edit")
                 x0_tar_denorm = (x0_tar / pipe.vae.config.scaling_factor) + pipe.vae.config.shift_factor
                 with torch.autocast("cuda"), torch.inference_mode():
                     image_tar = pipe.vae.decode(x0_tar_denorm, return_dict=False)[0]
@@ -137,7 +139,7 @@ if __name__ == "__main__":
                 src_prompt_txt = data_dict["input_img"].split("/")[-1].split(".")[0]
 
                 tar_prompt_txt = str(tar_num)
-                
+                print("DONE postprocess")
                 # make sure to create the directories before saving
                 save_dir = f"outputs/{exp_name}/{model_type}/src_{src_prompt_txt}/tar_{tar_prompt_txt}"
                 os.makedirs(save_dir, exist_ok=True)
@@ -149,6 +151,7 @@ if __name__ == "__main__":
                     f.write(f"Target prompt: {tar_prompt}\n")
                     f.write(f"Seed: {seed}\n")
                     f.write(f"Sampler type: {model_type}\n")
+                print("Saved")
                 
 
 
