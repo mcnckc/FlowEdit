@@ -40,7 +40,7 @@ if __name__ == "__main__":
         raise NotImplementedError(f"Model type {model_type} not implemented")
     pipe.enable_sequential_cpu_offload()
     scheduler = pipe.scheduler
-    pipe = pipe.to(device)
+    #pipe = pipe.to(device)
 
     for exp_dict in exp_configs:
 
