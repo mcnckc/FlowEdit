@@ -49,8 +49,8 @@ if __name__ == "__main__":
     pipe.transformer = pipe.transformer.to(device)
     pipe.vae = pipe.vae.to(device)
     print("LOADED TO GPU")
-    #apply_group_offloading(pipe.transformer, onload_device=device, offload_device=torch.device('cpu'), 
-    #                                      offload_type="block_level", num_blocks_per_group=11, use_stream=True)
+    apply_group_offloading(pipe.text_encoder_3, onload_device=device, offload_device=torch.device('cpu'), 
+                                          offload_type="block_level", num_blocks_per_group=12, use_stream=True)
     scheduler = pipe.scheduler
     #pipe = pipe.to(device)
 
