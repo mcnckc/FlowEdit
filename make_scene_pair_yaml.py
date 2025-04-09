@@ -4,9 +4,10 @@ with open('i_s.txt', 'r') as sf, open("target_labels.txt", 'r') as tf, open('sce
     for sline, tline in zip(sf, tf):
         filename, slabel = sline.split()
         tlabel = tline.split()[1]
-        res.write(f"-\tinput_img: scenepair/{filename}\n"
-                  f"\tsource_prompt: {slabel}\n"
-                  f"\ttarget_prompts:\n"
-                  f"\t- {tlabel}\n"
-                  f"\ttarget_codes:\n"
-                  f"\t- {filename}-{slabel}-to-{tlabel}\n")
+        res.write(f"-\n"
+                  f"    input_img: scenepair/{filename}\n"
+                  f"    source_prompt: {slabel}\n"
+                  f"    target_prompts:\n"
+                  f"    - {tlabel}\n"
+                  f"    target_codes:\n"
+                  f"    - {filename}-{slabel}-to-{tlabel}\n")
