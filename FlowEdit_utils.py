@@ -129,7 +129,7 @@ def FlowEditSD3(pipe,
     num_warmup_steps = max(len(timesteps) - T_steps * scheduler.order, 0)
     pipe._num_timesteps = len(timesteps)
     pipe._guidance_scale = src_guidance_scale
-    
+    print("EDIT1")
     # src prompts
     (
         src_prompt_embeds,
@@ -144,7 +144,7 @@ def FlowEditSD3(pipe,
         do_classifier_free_guidance=pipe.do_classifier_free_guidance,
         device=device,
     )
-
+    print("EDIT2")
     # tar prompts
     pipe._guidance_scale = tar_guidance_scale
     (
@@ -160,14 +160,14 @@ def FlowEditSD3(pipe,
         do_classifier_free_guidance=pipe.do_classifier_free_guidance,
         device=device,
     )
- 
+    print("EDIT3")
     # CFG prep
     src_tar_prompt_embeds = torch.cat([src_negative_prompt_embeds, src_prompt_embeds, tar_negative_prompt_embeds, tar_prompt_embeds], dim=0)
     src_tar_pooled_prompt_embeds = torch.cat([src_negative_pooled_prompt_embeds, src_pooled_prompt_embeds, tar_negative_pooled_prompt_embeds, tar_pooled_prompt_embeds], dim=0)
     
     # initialize our ODE Zt_edit_1=x_src
     zt_edit = x_src.clone()
-
+    print("EDIT LOOP")
     for i, t in tqdm(enumerate(timesteps)):
         
         if T_steps - i > n_max:
