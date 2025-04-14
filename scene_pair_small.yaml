@@ -1,100 +1,100 @@
 -
-    input_img: scenepair/1098.png
+    input_img: scenepair/7.png
     source_prompt: >-
-        the
+        Text that reads "Research"
     target_prompts:
     - >-
-        the
+        Text that reads "EU-funded"
     target_codes:
     - >-
-        1098.png-the-to-the
+        7.png-Research-to-EU-funded
 -
-    input_img: scenepair/894.png
+    input_img: scenepair/376.png
     source_prompt: >-
-        TREE
+        Text that reads "étrangère"
     target_prompts:
     - >-
-        AGE
+        Text that reads "Banque"
     target_codes:
     - >-
-        894.png-TREE-to-AGE
+        376.png-étrangère-to-Banque
 -
-    input_img: scenepair/320.png
+    input_img: scenepair/1132.png
     source_prompt: >-
-        Orange
+        Text that reads "Just"
     target_prompts:
     - >-
-        Orange
+        Text that reads "New"
     target_codes:
     - >-
-        320.png-Orange-to-Orange
+        1132.png-Just-to-New
 -
-    input_img: scenepair/898.png
+    input_img: scenepair/109.png
     source_prompt: >-
-        struggle
+        Text that reads "Office."
     target_prompts:
     - >-
-        those
+        Text that reads "here"
     target_codes:
     - >-
-        898.png-struggle-to-those
+        109.png-Office.-to-here
 -
-    input_img: scenepair/860.png
+    input_img: scenepair/578.png
     source_prompt: >-
-        CROSSED
+        Text that reads "day"
     target_prompts:
     - >-
-        CLIMBED
+        Text that reads "raises"
     target_codes:
     - >-
-        860.png-CROSSED-to-CLIMBED
+        578.png-day-to-raises
 -
-    input_img: scenepair/1241.png
+    input_img: scenepair/988.png
     source_prompt: >-
-        FEED
+        Text that reads "ZANE"
     target_prompts:
     - >-
-        DON'T
+        Text that reads "GREY"
     target_codes:
     - >-
-        1241.png-FEED-to-DON'T
+        988.png-ZANE-to-GREY
 -
-    input_img: scenepair/434.png
+    input_img: scenepair/262.png
     source_prompt: >-
-        Many
+        Text that reads "Permit"
     target_prompts:
     - >-
-        parcels
+        Text that reads "work"
     target_codes:
     - >-
-        434.png-Many-to-parcels
+        262.png-Permit-to-work
 -
-    input_img: scenepair/322.png
+    input_img: scenepair/452.png
     source_prompt: >-
-        hoss
+        Text that reads "Route"
     target_prompts:
     - >-
-        Standort
+        Text that reads "Sunset"
     target_codes:
     - >-
-        322.png-hoss-to-Standort
+        452.png-Route-to-Sunset
 -
-    input_img: scenepair/948.png
+    input_img: scenepair/61.png
     source_prompt: >-
-        shows
+        Text that reads "Rostanin"
     target_prompts:
     - >-
-        book
+        Text that reads "Shahab"
     target_codes:
     - >-
-        948.png-shows-to-book
+        61.png-Rostanin-to-Shahab
 -
-    input_img: scenepair/1160.png
+    input_img: scenepair/630.png
     source_prompt: >-
-        LOCUST
+        Text that reads "Münchner"
     target_prompts:
     - >-
-        GROVE
+        Text that reads "Bier"
     target_codes:
     - >-
-        1160.png-LOCUST-to-GROVE
+        630.png-Münchner-to-Bier

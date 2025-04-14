@@ -143,8 +143,9 @@ if __name__ == "__main__":
                 # make sure to create the directories before saving
                 save_dir = f"outputs/{exp_name}/{model_type}/src_{src_prompt_txt}/tar_{tar_prompt_txt}"
                 os.makedirs(save_dir, exist_ok=True)
-                
-                image_tar[0].save(f"{save_dir}/output_T_steps_{T_steps}_n_avg_{n_avg}_cfg_enc_{src_guidance_scale}_cfg_dec{tar_guidance_scale}_n_min_{n_min}_n_max_{n_max}_seed{seed}.png")
+                images_dir = "results"
+                image_tar[0].save(f"{images_dir}/{os.path.basename(image_src_path)}")
+                #image_tar[0].save(f"{save_dir}/output_T_steps_{T_steps}_n_avg_{n_avg}_cfg_enc_{src_guidance_scale}_cfg_dec{tar_guidance_scale}_n_min_{n_min}_n_max_{n_max}_seed{seed}.png")
                 # also save source and target prompt in txt file
                 with open(f"{save_dir}/prompts.txt", "w") as f:
                     f.write(f"Source prompt: {src_prompt}\n")
