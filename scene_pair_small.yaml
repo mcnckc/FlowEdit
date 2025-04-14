@@ -1,0 +1,100 @@
+-
+    input_img: scenepair/1098.png
+    source_prompt: >-
+        the
+    target_prompts:
+    - >-
+        the
+    target_codes:
+    - >-
+        1098.png-the-to-the
+-
+    input_img: scenepair/894.png
+    source_prompt: >-
+        TREE
+    target_prompts:
+    - >-
+        AGE
+    target_codes:
+    - >-
+        894.png-TREE-to-AGE
+-
+    input_img: scenepair/320.png
+    source_prompt: >-
+        Orange
+    target_prompts:
+    - >-
+        Orange
+    target_codes:
+    - >-
+        320.png-Orange-to-Orange
+-
+    input_img: scenepair/898.png
+    source_prompt: >-
+        struggle
+    target_prompts:
+    - >-
+        those
+    target_codes:
+    - >-
+        898.png-struggle-to-those
+-
+    input_img: scenepair/860.png
+    source_prompt: >-
+        CROSSED
+    target_prompts:
+    - >-
+        CLIMBED
+    target_codes:
+    - >-
+        860.png-CROSSED-to-CLIMBED
+-
+    input_img: scenepair/1241.png
+    source_prompt: >-
+        FEED
+    target_prompts:
+    - >-
+        DON'T
+    target_codes:
+    - >-
+        1241.png-FEED-to-DON'T
+-
+    input_img: scenepair/434.png
+    source_prompt: >-
+        Many
+    target_prompts:
+    - >-
+        parcels
+    target_codes:
+    - >-
+        434.png-Many-to-parcels
+-
+    input_img: scenepair/322.png
+    source_prompt: >-
+        hoss
+    target_prompts:
+    - >-
+        Standort
+    target_codes:
+    - >-
+        322.png-hoss-to-Standort
+-
+    input_img: scenepair/948.png
+    source_prompt: >-
+        shows
+    target_prompts:
+    - >-
+        book
+    target_codes:
+    - >-
+        948.png-shows-to-book
+-
+    input_img: scenepair/1160.png
+    source_prompt: >-
+        LOCUST
+    target_prompts:
+    - >-
+        GROVE
+    target_codes:
+    - >-
+        1160.png-LOCUST-to-GROVE
