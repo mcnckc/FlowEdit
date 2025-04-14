@@ -1,100 +1,30 @@
 -
-    input_img: scenepair/7.png
+    input_img: scenepair/379.png
     source_prompt: >-
-        Text that reads "Research"
+        Label don't
     target_prompts:
     - >-
-        Text that reads "EU-funded"
+        Label regret
     target_codes:
     - >-
-        7.png-Research-to-EU-funded
+        379.png-don't-to-regret
 -
-    input_img: scenepair/376.png
+    input_img: scenepair/641.png
     source_prompt: >-
-        Text that reads "étrangère"
+        Label Obama
     target_prompts:
     - >-
-        Text that reads "Banque"
+        Label Barack
     target_codes:
     - >-
-        376.png-étrangère-to-Banque
+        641.png-Obama-to-Barack
 -
-    input_img: scenepair/1132.png
+    input_img: scenepair/284.png
     source_prompt: >-
-        Text that reads "Just"
+        Label Lautsprecher
     target_prompts:
     - >-
-        Text that reads "New"
+        Label Briefkasten
     target_codes:
     - >-
-        1132.png-Just-to-New
--
-    input_img: scenepair/109.png
-    source_prompt: >-
-        Text that reads "Office."
-    target_prompts:
-    - >-
-        Text that reads "here"
-    target_codes:
-    - >-
-        109.png-Office.-to-here
--
-    input_img: scenepair/578.png
-    source_prompt: >-
-        Text that reads "day"
-    target_prompts:
-    - >-
-        Text that reads "raises"
-    target_codes:
-    - >-
-        578.png-day-to-raises
--
-    input_img: scenepair/988.png
-    source_prompt: >-
-        Text that reads "ZANE"
-    target_prompts:
-    - >-
-        Text that reads "GREY"
-    target_codes:
-    - >-
-        988.png-ZANE-to-GREY
--
-    input_img: scenepair/262.png
-    source_prompt: >-
-        Text that reads "Permit"
-    target_prompts:
-    - >-
-        Text that reads "work"
-    target_codes:
-    - >-
-        262.png-Permit-to-work
--
-    input_img: scenepair/452.png
-    source_prompt: >-
-        Text that reads "Route"
-    target_prompts:
-    - >-
-        Text that reads "Sunset"
-    target_codes:
-    - >-
-        452.png-Route-to-Sunset
--
-    input_img: scenepair/61.png
-    source_prompt: >-
-        Text that reads "Rostanin"
-    target_prompts:
-    - >-
-        Text that reads "Shahab"
-    target_codes:
-    - >-
-        61.png-Rostanin-to-Shahab
--
-    input_img: scenepair/630.png
-    source_prompt: >-
-        Text that reads "Münchner"
-    target_prompts:
-    - >-
-        Text that reads "Bier"
-    target_codes:
-    - >-
-        630.png-Münchner-to-Bier
+        284.png-Lautsprecher-to-Briefkasten
