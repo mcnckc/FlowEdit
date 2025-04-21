@@ -31,6 +31,7 @@ if __name__ == "__main__":
 
     device = torch.device(f"cuda:{device_number}" if torch.cuda.is_available() else "cpu")
     model_type = exp_configs[0]["model_type"] # currently only one model type per run
+    print('Using device:', device)
 
     if model_type == 'FLUX':
         # pipe = FluxPipeline.from_pretrained("black-forest-labs/FLUX.1-schnell", torch_dtype=torch.float16) 
@@ -38,6 +39,8 @@ if __name__ == "__main__":
         pipe = pipe.to(device)
     elif model_type == 'SD3':
         pipe = StableDiffusion3Pipeline.from_pretrained("stabilityai/stable-diffusion-3-medium-diffusers", torch_dtype=torch.float16)
+        pipe = pipe.to(device)
+        """
         pipe.text_encoder = pipe.text_encoder.to(device)
         pipe.text_encoder_2 = pipe.text_encoder_2.to(device)
         pipe.vae = pipe.vae.to(device)
@@ -45,6 +48,7 @@ if __name__ == "__main__":
                                           offload_type="block_level", num_blocks_per_group=12, use_stream=True)
         apply_group_offloading(pipe.transformer, onload_device=device, offload_device=torch.device('cpu'), 
                                           offload_type="block_level", num_blocks_per_group=11, use_stream=True)
+        """
     else:
         raise NotImplementedError(f"Model type {model_type} not implemented")
     
@@ -145,7 +149,8 @@ if __name__ == "__main__":
                 os.makedirs(save_dir, exist_ok=True)
                 images_dir = "results"
                 os.makedirs(images_dir, exist_ok=True)
-                image_tar[0].save(f"{images_dir}/{os.path.basename(image_src_path)}")
+                fname = os.path.basename(image_src_path).split('.')
+                image_tar[0].save(f"{images_dir}/{fname[0]}-{tar_prompt_txt}.{fname[1]}")
                 #image_tar[0].save(f"{save_dir}/output_T_steps_{T_steps}_n_avg_{n_avg}_cfg_enc_{src_guidance_scale}_cfg_dec{tar_guidance_scale}_n_min_{n_min}_n_max_{n_max}_seed{seed}.png")
                 # also save source and target prompt in txt file
                 with open(f"{save_dir}/prompts.txt", "w") as f:
@@ -160,5 +165,3 @@ if __name__ == "__main__":
 
 
     print("Done")
-
-    # %%
