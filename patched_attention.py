@@ -15,7 +15,7 @@ class PatchedJointAttnProcessor2_0:
             raise ValueError('Patched Attention mode must be either patching or caching')
         if not hasattr(F, "scaled_dot_product_attention"):
             raise ImportError("JointAttnProcessor2_0 requires PyTorch 2.0, to use it, please upgrade PyTorch to 2.0.")
-        self.save_last_half = True
+        self.save_last_half = save_last_half
         
     def to_patching_mode(self):
         if not hasattr(self, "cached_key") or not hasattr(self, "cached_value"):

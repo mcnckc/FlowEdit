@@ -13,7 +13,6 @@ def calc_v_sd3_patched(pipe, src_tar_latent_model_input, src_tar_prompt_embeds, 
     # joint_attention_kwargs["timestep"] = timestep[0]
     # joint_attention_kwargs["timestep_idx"] = i
 
-    
     with torch.no_grad():
         pipe.transformer.transformer_blocks[10].attn.processor.to_caching_mode()
         # # predict the noise for the source prompt
@@ -32,17 +31,11 @@ def calc_v_sd3_patched(pipe, src_tar_latent_model_input, src_tar_prompt_embeds, 
             noise_pred_src = src_noise_pred_uncond + src_guidance_scale * (src_noise_pred_text - src_noise_pred_uncond)
 
         pipe.transformer.transformer_blocks[10].attn.processor.to_patching_mode()
-        src_latent_model_input = src_tar_latent_model_input.chunk(2)[0]
-        src_prompt_embeds = src_tar_prompt_embeds.chunk(2)[0]
-        src_pooled_prompt_embeds = src_tar_pooled_prompt_embeds.chunk(2)[0]
-        print(f"half shapes:", src_latent_model_input.shape,
-        src_prompt_embeds.shape,
-        src_pooled_prompt_embeds.shape)
         noise_pred_tar = pipe.transformer(
-            hidden_states=src_latent_model_input,
-            timestep=timestep,
-            encoder_hidden_states=src_prompt_embeds,
-            pooled_projections=src_pooled_prompt_embeds,
+            hidden_states=src_tar_latent_model_input.chunk(2)[0],
+            timestep=timestep.chunk(2)[0],
+            encoder_hidden_states=src_tar_prompt_embeds.chunk(2)[0],
+            pooled_projections=src_tar_pooled_prompt_embeds.chunk(2)[0],
             joint_attention_kwargs=None,
             return_dict=False,
         )[0]
