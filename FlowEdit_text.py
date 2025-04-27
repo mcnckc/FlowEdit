@@ -88,6 +88,8 @@ def FlowEditTextSD3(pipe,
     )
     print("EDIT3")
     # CFG prep
+    print('Shapes:', src_negative_prompt_embeds.shape, src_prompt_embeds.shape, tar_negative_prompt_embeds.shape, tar_prompt_embeds.shape)
+    print('Shapes:', src_negative_pooled_prompt_embeds.shape, src_pooled_prompt_embeds.shape, tar_negative_pooled_prompt_embeds.shape, tar_pooled_prompt_embeds.shape)
     src_tar_prompt_embeds = torch.cat([src_negative_prompt_embeds, src_prompt_embeds, tar_negative_prompt_embeds, tar_prompt_embeds], dim=0)
     src_tar_pooled_prompt_embeds = torch.cat([src_negative_pooled_prompt_embeds, src_pooled_prompt_embeds, tar_negative_pooled_prompt_embeds, tar_pooled_prompt_embeds], dim=0)
     
