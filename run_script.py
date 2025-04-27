@@ -8,7 +8,8 @@ import random
 import numpy as np
 import yaml
 import os
-from FlowEdit_utils import FlowEditSD3, FlowEditFLUX
+from src.flowedit_sd3 import FlowEditSD3
+from src.flowedit_flux import FlowEditFLUX
 from tqdm import tqdm
 
 
@@ -17,7 +18,8 @@ if __name__ == "__main__":
     parser = argparse.ArgumentParser()
     parser.add_argument("--device_number", type=int, default=0, help="device number to use")
     parser.add_argument("--exp_yaml", type=str, default="FLUX_exp.yaml", help="experiment yaml file")
-
+    parser.add_argument("--scene_text_edit", type=bool, default=False, help="experiment yaml file")
+    parser.add_argument("--offload_half_layers", type=bool, default=False, help="experiment yaml file")
     args = parser.parse_args()
 
     # set device
@@ -39,16 +41,16 @@ if __name__ == "__main__":
         pipe = pipe.to(device)
     elif model_type == 'SD3':
         pipe = StableDiffusion3Pipeline.from_pretrained("stabilityai/stable-diffusion-3-medium-diffusers", torch_dtype=torch.float16)
-        pipe = pipe.to(device)
-        """
-        pipe.text_encoder = pipe.text_encoder.to(device)
-        pipe.text_encoder_2 = pipe.text_encoder_2.to(device)
-        pipe.vae = pipe.vae.to(device)
-        apply_group_offloading(pipe.text_encoder_3, onload_device=device, offload_device=torch.device('cpu'), 
-                                          offload_type="block_level", num_blocks_per_group=12, use_stream=True)
-        apply_group_offloading(pipe.transformer, onload_device=device, offload_device=torch.device('cpu'), 
-                                          offload_type="block_level", num_blocks_per_group=11, use_stream=True)
-        """
+        if args.offload_half_layers:
+            pipe.text_encoder = pipe.text_encoder.to(device)
+            pipe.text_encoder_2 = pipe.text_encoder_2.to(device)
+            pipe.vae = pipe.vae.to(device)
+            apply_group_offloading(pipe.text_encoder_3, onload_device=device, offload_device=torch.device('cpu'), 
+                                            offload_type="block_level", num_blocks_per_group=12, use_stream=True)
+            apply_group_offloading(pipe.transformer, onload_device=device, offload_device=torch.device('cpu'), 
+                                            offload_type="block_level", num_blocks_per_group=11, use_stream=True)
+        else:
+            pipe = pipe.to(device)
     else:
         raise NotImplementedError(f"Model type {model_type} not implemented")
     
@@ -116,7 +118,8 @@ if __name__ == "__main__":
                                                             src_guidance_scale,
                                                             tar_guidance_scale,
                                                             n_min,
-                                                            n_max,)
+                                                            n_max,
+                                                            scene_text_edit=args.scene_text_edit)
                     
                 elif model_type == 'FLUX':
                     x0_tar = FlowEditFLUX(pipe,
@@ -160,8 +163,5 @@ if __name__ == "__main__":
                     f.write(f"Sampler type: {model_type}\n")
                 print("Saved")
                 
-
-
-
 
     print("Done")

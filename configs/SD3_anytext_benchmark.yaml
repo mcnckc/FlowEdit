@@ -10,4 +10,6 @@
   n_min: 0
   n_max: 27
   seed: 179
+  scene_text_edit: True
+  offload_half_layers: False
 
