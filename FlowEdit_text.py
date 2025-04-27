@@ -35,7 +35,9 @@ def calc_v_sd3_patched(pipe, src_tar_latent_model_input, src_tar_prompt_embeds, 
         src_latent_model_input = src_tar_latent_model_input.chunk(2)[0]
         src_prompt_embeds = src_tar_prompt_embeds.chunk(2)[0]
         src_pooled_prompt_embeds = src_tar_pooled_prompt_embeds.chunk(2)[0]
-
+        print(f"half shapes:", src_latent_model_input.shape,
+        src_prompt_embeds.shape,
+        src_pooled_prompt_embeds.shape)
         noise_pred_tar = pipe.transformer(
             hidden_states=src_latent_model_input,
             timestep=timestep,
