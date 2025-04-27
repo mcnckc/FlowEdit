@@ -86,7 +86,7 @@ class PatchedJointAttnProcessor2_0:
                     encoder_hidden_states_key_proj = attn.norm_added_k(encoder_hidden_states_key_proj)
                 key = torch.cat([key, encoder_hidden_states_key_proj], dim=2)
                 value = torch.cat([value, encoder_hidden_states_value_proj], dim=2)
-            
+            print(f"Cached shapes: {key.shape}, {value.shape}")
             self.cached_key = key
             self.cached_value = value
 
