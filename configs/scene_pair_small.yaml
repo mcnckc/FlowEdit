@@ -1,0 +1,30 @@
+-
+    input_img: scenepair/452.png
+    source_prompt: >-
+        Label Route
+    target_prompts:
+    - >-
+        Label Sunset
+    target_codes:
+    - >-
+        452.png-Route-to-Sunset
+-
+    input_img: scenepair/838.png
+    source_prompt: >-
+        Label LÉGER
+    target_prompts:
+    - >-
+        Label Hors
+    target_codes:
+    - >-
+        838.png-LÉGER-to-Hors
+-
+    input_img: scenepair/1082.png
+    source_prompt: >-
+        Label client
+    target_prompts:
+    - >-
+        Label Partie
+    target_codes:
+    - >-
+        1082.png-client-to-Partie
