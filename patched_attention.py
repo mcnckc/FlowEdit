@@ -6,7 +6,7 @@ import torch.nn.functional as F
 class PatchedJointAttnProcessor2_0:
     """Attention processor used typically in processing the SD3-like self-attention projections."""
 
-    def __init__(self, mode: str):
+    def __init__(self, mode: str, save_last_half=True):
         if mode == 'patching':
             self.patching = True
         elif mode == 'caching':
@@ -15,12 +15,13 @@ class PatchedJointAttnProcessor2_0:
             raise ValueError('Patched Attention mode must be either patching or caching')
         if not hasattr(F, "scaled_dot_product_attention"):
             raise ImportError("JointAttnProcessor2_0 requires PyTorch 2.0, to use it, please upgrade PyTorch to 2.0.")
+        self.save_last_half = True
         
     def to_patching_mode(self):
         if not hasattr(self, "cached_key") or not hasattr(self, "cached_value"):
             raise ValueError('Key and Value were not cached!')
         self.patching = True
-    
+
     def to_caching_mode(self):
         self.patching = False
         self.cached_key = None
@@ -66,6 +67,7 @@ class PatchedJointAttnProcessor2_0:
         if self.patching:
             key = self.cached_key
             value = self.cached_value
+            print(f"patched, shapes: {key.shape}, {value.shape}")
         else:
             key = attn.to_k(hidden_states)
             value = attn.to_v(hidden_states)
@@ -86,9 +88,13 @@ class PatchedJointAttnProcessor2_0:
                     encoder_hidden_states_key_proj = attn.norm_added_k(encoder_hidden_states_key_proj)
                 key = torch.cat([key, encoder_hidden_states_key_proj], dim=2)
                 value = torch.cat([value, encoder_hidden_states_value_proj], dim=2)
-            print(f"Cached shapes: {key.shape}, {value.shape}")
-            self.cached_key = key
-            self.cached_value = value
+            if self.save_last_half:
+                self.cached_key = key.chunk(2)[-1]
+                self.cached_value = value.chunk(2)[-1]
+            else:
+                self.cached_key = key
+                self.cached_value = value
+            print(f"Cached shapes: {self.cached_key.shape}, {self.cached_value.shape}")
 
         assert query.shape[-1] == key.shape[-1]
 
