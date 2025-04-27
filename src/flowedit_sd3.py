@@ -3,9 +3,9 @@ import torch
 from diffusers import FlowMatchEulerDiscreteScheduler
 from tqdm import tqdm
 import numpy as np
-from patched_attention import PatchedJointAttnProcessor2_0
-from patched_sd3 import calc_v_sd3_patched
-from flowedit_utils import scale_noise
+from .patched_attention import PatchedJointAttnProcessor2_0
+from .patched_sd3 import calc_v_sd3_patched
+from .flowedit_utils import scale_noise
 from diffusers.pipelines.stable_diffusion.pipeline_stable_diffusion import retrieve_timesteps
 
 

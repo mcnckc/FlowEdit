@@ -4,7 +4,7 @@ from diffusers import FlowMatchEulerDiscreteScheduler
 from tqdm import tqdm
 import numpy as np
 from diffusers.pipelines.stable_diffusion.pipeline_stable_diffusion import retrieve_timesteps
-from flowedit_utils import scale_noise
+from .flowedit_utils import scale_noise
 
 def calculate_shift(
     image_seq_len,
