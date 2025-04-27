@@ -40,8 +40,8 @@ if __name__ == "__main__":
         pipe = pipe.to(device)
     elif model_type == 'SD3':
         pipe = StableDiffusion3Pipeline.from_pretrained("stabilityai/stable-diffusion-3-medium-diffusers", torch_dtype=torch.float16)
-        pipe = pipe.to(device)
-        """
+        #pipe = pipe.to(device)
+        
         pipe.text_encoder = pipe.text_encoder.to(device)
         pipe.text_encoder_2 = pipe.text_encoder_2.to(device)
         pipe.vae = pipe.vae.to(device)
@@ -49,7 +49,7 @@ if __name__ == "__main__":
                                           offload_type="block_level", num_blocks_per_group=12, use_stream=True)
         apply_group_offloading(pipe.transformer, onload_device=device, offload_device=torch.device('cpu'), 
                                           offload_type="block_level", num_blocks_per_group=11, use_stream=True)
-        """
+        
     else:
         raise NotImplementedError(f"Model type {model_type} not implemented")
     
