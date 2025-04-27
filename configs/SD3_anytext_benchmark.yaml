@@ -11,5 +11,5 @@
   n_max: 27
   seed: 179
   scene_text_edit: True
-  offload_half_layers: False
+  offload_half_layers: True
 
