@@ -42,6 +42,7 @@ if __name__ == "__main__":
     elif model_type == 'SD3':
         pipe = StableDiffusion3Pipeline.from_pretrained("stabilityai/stable-diffusion-3-medium-diffusers", torch_dtype=torch.float16)
         if args.offload_half_layers:
+            print("OFFLOADING")
             pipe.text_encoder = pipe.text_encoder.to(device)
             pipe.text_encoder_2 = pipe.text_encoder_2.to(device)
             pipe.vae = pipe.vae.to(device)

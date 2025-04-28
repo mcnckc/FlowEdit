@@ -138,7 +138,7 @@ def FlowEditSD3(pipe,
             zt_edit = zt_edit.to(V_delta_avg.dtype)
 
         else: # i >= T_steps-n_min # regular sampling for last n_min steps
-
+            print("NMIN CASE:")
             if i == T_steps-n_min:
                 # initialize SDEDIT-style generation phase
                 fwd_noise = torch.randn_like(x_src).to(x_src.device)
