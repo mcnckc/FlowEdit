@@ -67,7 +67,7 @@ class PatchedJointAttnProcessor2_0:
         if self.patching:
             key = self.cached_key
             value = self.cached_value
-            print(f"patched, shapes: {key.shape}, {value.shape}")
+            #print(f"patched, shapes: {key.shape}, {value.shape}")
         else:
             key = attn.to_k(hidden_states)
             value = attn.to_v(hidden_states)
@@ -94,7 +94,7 @@ class PatchedJointAttnProcessor2_0:
             else:
                 self.cached_key = key
                 self.cached_value = value
-            print(f"Cached shapes: {self.cached_key.shape}, {self.cached_value.shape}")
+            #print(f"Cached shapes: {self.cached_key.shape}, {self.cached_value.shape}")
 
         assert query.shape[-1] == key.shape[-1]
 
