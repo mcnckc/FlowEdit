@@ -9,7 +9,7 @@ exps:
     T_steps: 50
     n_avg: 1
     src_guidance_scale: 3
-    tar_guidance_scale: 9
+    tar_guidance_scale: 3
     n_min: 0
     n_max: 50
     seed: 179
