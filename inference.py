@@ -1,9 +1,9 @@
 import torch
+from omegaconf import OmegaConf
 from diffusers import StableDiffusion3Pipeline
 from diffusers import FluxPipeline
 from diffusers.hooks import apply_group_offloading
 from PIL import Image
-import argparse
 import random 
 import numpy as np
 import yaml
@@ -12,27 +12,23 @@ from src.flowedit_sd3 import FlowEditSD3
 from src.flowedit_flux import FlowEditFLUX
 from tqdm import tqdm
 
+def load_config():
+    conf_cli = OmegaConf.from_cli()
+    config_path = conf_cli.config_path
+    conf_file = OmegaConf.load(config_path)
+    config = OmegaConf.merge(conf_file, conf_cli)
+    return config
 
 if __name__ == "__main__":
-
-    parser = argparse.ArgumentParser()
-    parser.add_argument("--device_number", type=int, default=0, help="device number to use")
-    parser.add_argument("--exp_yaml", type=str, default="FLUX_exp.yaml", help="experiment yaml file")
-    parser.add_argument("--scene_text_edit", type=bool, default=False, help="experiment yaml file")
-    parser.add_argument("--offload_half_layers", type=bool, default=False, help="experiment yaml file")
-    args = parser.parse_args()
-
+    cfg = load_config()
     # set device
-    device_number = args.device_number
+    device_number = cfg.device_number
     device = torch.device(f"cuda:{device_number}" if torch.cuda.is_available() else "cpu")
 
     # load exp yaml file to dict
-    exp_yaml = args.exp_yaml
-    with open(exp_yaml) as file:
-        exp_configs = yaml.load(file, Loader=yaml.FullLoader)
 
     device = torch.device(f"cuda:{device_number}" if torch.cuda.is_available() else "cpu")
-    model_type = exp_configs[0]["model_type"] # currently only one model type per run
+    model_type = cfg.model_type # currently only one model type per run
     print('Using device:', device)
 
     if model_type == 'FLUX':
@@ -41,7 +37,7 @@ if __name__ == "__main__":
         pipe = pipe.to(device)
     elif model_type == 'SD3':
         pipe = StableDiffusion3Pipeline.from_pretrained("stabilityai/stable-diffusion-3-medium-diffusers", torch_dtype=torch.float16)
-        if args.offload_half_layers:
+        if cfg.offload_half_layers:
             print("OFFLOADING")
             pipe.text_encoder = pipe.text_encoder.to(device)
             pipe.text_encoder_2 = pipe.text_encoder_2.to(device)
@@ -58,7 +54,7 @@ if __name__ == "__main__":
     
     scheduler = pipe.scheduler
     print("LOADED TO GPU")
-    for exp_dict in exp_configs:
+    for exp_dict in cfg.exps:
 
         exp_name = exp_dict["exp_name"]
         # model_type = exp_dict["model_type"]
@@ -69,7 +65,7 @@ if __name__ == "__main__":
         n_min = exp_dict["n_min"]
         n_max = exp_dict["n_max"]
         seed = exp_dict["seed"]
-
+        scene_text_edit = exp_dict.scene_text_edit
         # set seed
         random.seed(seed)
         np.random.seed(seed)
@@ -120,7 +116,7 @@ if __name__ == "__main__":
                                                             tar_guidance_scale,
                                                             n_min,
                                                             n_max,
-                                                            scene_text_edit=args.scene_text_edit)
+                                                            scene_text_edit=scene_text_edit)
                     
                 elif model_type == 'FLUX':
                     x0_tar = FlowEditFLUX(pipe,
