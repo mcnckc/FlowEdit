@@ -99,6 +99,7 @@ def FlowEditSD3(pipe,
     if scene_text_edit:
         pipe.transformer.transformer_blocks[10].attn.set_processor(PatchedJointAttnProcessor2_0(mode='caching'))
     print("EDIT LOOP")
+    print(timesteps)
     for i, t in tqdm(enumerate(timesteps)):
         
         if T_steps - i > n_max:
