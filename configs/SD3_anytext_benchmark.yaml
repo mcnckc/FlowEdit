@@ -8,10 +8,10 @@ exps:
     sampler_type: "FlowEditSD3"
     T_steps: 50
     n_avg: 1
-    src_guidance_scale: 3
-    tar_guidance_scale: 9
-    n_min: 10
-    n_max: 27
+    src_guidance_scale: 3.5
+    tar_guidance_scale: 13.5
+    n_min: 0
+    n_max: 33
     seed: 179
     scene_text_edit: True
 

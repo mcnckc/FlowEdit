@@ -99,7 +99,6 @@ def FlowEditSD3(pipe,
     if scene_text_edit:
         pipe.transformer.transformer_blocks[10].attn.set_processor(PatchedJointAttnProcessor2_0(mode='caching'))
     print("EDIT LOOP")
-    print(timesteps)
     for i, t in tqdm(enumerate(timesteps)):
         
         if T_steps - i > n_max:
@@ -154,7 +153,7 @@ def FlowEditSD3(pipe,
 
             prev_sample = xt_tar + (t_im1 - t_i) * (Vt_tar)
 
-            prev_sample = prev_sample.to(noise_pred_tar.dtype)
+            prev_sample = prev_sample.to(xt_tar.dtype)
 
             xt_tar = prev_sample
         
