@@ -25,7 +25,7 @@ def calc_v_sd3_patched(pipe, src_tar_latent_model_input, src_tar_prompt_embeds, 
             src_noise_pred_uncond, src_noise_pred_text, _, _ = noise_pred_src_tar.chunk(4)
             noise_pred_src = src_noise_pred_uncond + src_guidance_scale * (src_noise_pred_text - src_noise_pred_uncond)
 
-        pipe.transformer.transformer_blocks[10].attn.processor.to_patching_mode()
+        #pipe.transformer.transformer_blocks[10].attn.processor.to_patching_mode()
         noise_pred_tar = pipe.transformer(
             hidden_states=src_tar_latent_model_input.chunk(2)[0],
             timestep=timestep.chunk(2)[0],
