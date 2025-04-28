@@ -47,6 +47,7 @@ if __name__ == "__main__":
             apply_group_offloading(pipe.transformer, onload_device=device, offload_device=torch.device('cpu'), 
                                             offload_type="block_level", num_blocks_per_group=11, use_stream=True)
         else:
+            print("NO OFFLOAD")
             pipe = pipe.to(device)
     else:
         raise NotImplementedError(f"Model type {model_type} not implemented")
