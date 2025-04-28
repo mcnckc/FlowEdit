@@ -126,6 +126,7 @@ def FlowEditSD3(pipe,
                 if scene_text_edit:
                     Vt_src, Vt_tar = calc_v_sd3_patched(pipe, src_tar_latent_model_input, src_tar_prompt_embeds, src_tar_pooled_prompt_embeds, src_guidance_scale, tar_guidance_scale, t)
                 else:
+                    print('casual')
                     Vt_src, Vt_tar = calc_v_sd3(pipe, src_tar_latent_model_input, src_tar_prompt_embeds, src_tar_pooled_prompt_embeds, src_guidance_scale, tar_guidance_scale, t)
 
                 V_delta_avg += (1/n_avg) * (Vt_tar - Vt_src) # - (hfg-1)*( x_src))
