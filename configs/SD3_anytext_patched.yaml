@@ -3,7 +3,7 @@ offload_half_layers: True
 model_type: "SD3"
 exps:
   -
-    exp_name: "FlowEdit_SD3"
+    exp_name: "CFG3-3"
     dataset_yaml: anytext-bench.yaml
     sampler_type: "FlowEditSD3"
     T_steps: 50
