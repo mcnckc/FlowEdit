@@ -3,6 +3,7 @@ from diffusers import StableDiffusion3Pipeline
 from omegaconf import OmegaConf
 from diffusers.hooks import apply_group_offloading
 from patched_attention2 import PatchedJointAttnProcessor2_0
+import os
 
 def load_config():
     conf_cli = OmegaConf.from_cli()
@@ -15,7 +16,7 @@ if __name__ == "__main__":
     #cfg = load_config()
     device = torch.device(f"cuda:0" if torch.cuda.is_available() else "cpu")
     pipe = StableDiffusion3Pipeline.from_pretrained("stabilityai/stable-diffusion-3-medium-diffusers", torch_dtype=torch.float16)
-    if True:
+    if False:
         print("OFFLOADING")
         pipe.text_encoder = pipe.text_encoder.to(device)
         pipe.text_encoder_2 = pipe.text_encoder_2.to(device)
@@ -27,10 +28,24 @@ if __name__ == "__main__":
     else:
         print("NO OFFLOAD")
         pipe = pipe.to(device)
-    #src_prompt = "KEEP CALM AND CARRY ON, image contains text that reads \"KEEP CALM AND CARRY ON\""
-    #tar_prompt = "KEEP Salt AND CARRY ON, image contains text that reads \"KEEP Salt AND CARRY ON\""
+
     src_prompt = "Corgi dog with a sign saying \"food\""
     tar_prompt = "Corgi dog with a sign saying \"Hello\""
+
+    ims = pipe(
+        prompt=[src_prompt] * 20,
+        negative_prompt="",
+        num_inference_steps=50,
+        height=512,
+        width=512,
+        guidance_scale=8.5
+    ).images
+    os.makedirs('corgi-results', exist_ok=True)
+    for i, im in enumerate(ims):
+        im.save(str(i) + '.png')
+    #src_prompt = "KEEP CALM AND CARRY ON, image contains text that reads \"KEEP CALM AND CARRY ON\""
+    #tar_prompt = "KEEP Salt AND CARRY ON, image contains text that reads \"KEEP Salt AND CARRY ON\""
+    """
     latents = pipe.prepare_latents(
         1,
         pipe.transformer.config.in_channels,
@@ -75,3 +90,4 @@ if __name__ == "__main__":
     src_im.save("src.png")
     mid_im.save("mid.png")
     tar_im.save("tar.png")
+    """
