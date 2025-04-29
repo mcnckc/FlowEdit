@@ -40,25 +40,26 @@ if __name__ == "__main__":
         device,
         generator=None
     )
+    CFG = 1
     src_im = pipe(
         prompt=src_prompt,
         negative_prompt="",
         num_inference_steps=50,
         height=512,
         width=512,
-        guidance_scale=7.0,
+        guidance_scale=CFG,
         latents=latents
     ).images[0]
 
     pipe.transformer.transformer_blocks[10].attn.set_processor(PatchedJointAttnProcessor2_0(mode='caching'))
     pipe.transformer.transformer_blocks[10].attn.processor.to_caching_mode()
-    _ = pipe(
+    mid_im = pipe(
         prompt=tar_prompt,
         negative_prompt="",
         num_inference_steps=50,
         height=512,
         width=512,
-        guidance_scale=7.0,
+        guidance_scale=CFG,
         latents=latents
     ).images[0]
     pipe.transformer.transformer_blocks[10].attn.processor.to_patching_mode()
@@ -68,8 +69,9 @@ if __name__ == "__main__":
         num_inference_steps=50,
         height=512,
         width=512,
-        guidance_scale=7.0,
+        guidance_scale=CFG,
         latents=latents
     ).images[0]
     src_im.save("src.png")
+    mid_im.save("mid.png")
     tar_im.save("tar.png")
