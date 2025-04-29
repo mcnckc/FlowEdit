@@ -34,6 +34,7 @@ if __name__ == "__main__":
         512,
         pipe.dtype,
         device,
+        generator=None
     )
     image = pipe(
         prompt="KEEP CALM AND CARRY ON, image contains text that reads \"KEEP CALM AND CARRY ON\"",
