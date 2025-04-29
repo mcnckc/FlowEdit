@@ -40,7 +40,7 @@ if __name__ == "__main__":
         device,
         generator=None
     )
-    CFG = 1
+    CFG = 15
     src_im = pipe(
         prompt=src_prompt,
         negative_prompt="",
