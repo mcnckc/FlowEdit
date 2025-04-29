@@ -60,6 +60,7 @@ def FlowEditSD3(pipe,
     pipe._num_timesteps = len(timesteps)
     pipe._guidance_scale = src_guidance_scale
     print("EDIT1")
+    print("GUIDE", pipe.do_classifier_free_guidance)
     # src prompts
     (
         src_prompt_embeds,
@@ -74,6 +75,11 @@ def FlowEditSD3(pipe,
         do_classifier_free_guidance=pipe.do_classifier_free_guidance,
         device=device,
     )
+    print(src_prompt_embeds,
+        src_negative_prompt_embeds,
+        src_pooled_prompt_embeds,
+        src_negative_pooled_prompt_embeds)
+    return
     print("EDIT2")
     # tar prompts
     pipe._guidance_scale = tar_guidance_scale
