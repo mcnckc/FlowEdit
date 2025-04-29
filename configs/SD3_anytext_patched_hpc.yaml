@@ -1,7 +1,7 @@
 device_number: 0
 offload_half_layers: False
 model_type: "SD3"
-max_edits: 60
+max_edits: 11
 exps:
   -
     exp_name: "CFG1-1"
