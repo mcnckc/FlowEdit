@@ -72,14 +72,13 @@ def FlowEditSD3(pipe,
         prompt_2=None,
         prompt_3=None,
         negative_prompt=negative_prompt,
-        do_classifier_free_guidance=pipe.do_classifier_free_guidance,
+        do_classifier_free_guidance=True,
         device=device,
     )
     print(src_prompt_embeds,
         src_negative_prompt_embeds,
         src_pooled_prompt_embeds,
         src_negative_pooled_prompt_embeds)
-    return
     print("EDIT2")
     # tar prompts
     pipe._guidance_scale = tar_guidance_scale
@@ -93,7 +92,7 @@ def FlowEditSD3(pipe,
         prompt_2=None,
         prompt_3=None,
         negative_prompt=negative_prompt,
-        do_classifier_free_guidance=pipe.do_classifier_free_guidance,
+        do_classifier_free_guidance=True,
         device=device,
     )
     print("EDIT3")
