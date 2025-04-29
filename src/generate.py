@@ -7,7 +7,7 @@ import os
 
 def load_config():
     conf_cli = OmegaConf.from_cli()
-    conf_file = OmegaConf.load('../configs/generate_defaults.yaml')
+    conf_file = OmegaConf.load(conf_cli.default_config)
     config = OmegaConf.merge(conf_file, conf_cli)
     return config
 
