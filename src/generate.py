@@ -7,16 +7,15 @@ import os
 
 def load_config():
     conf_cli = OmegaConf.from_cli()
-    config_path = conf_cli.config_path
-    conf_file = OmegaConf.load(config_path)
+    conf_file = OmegaConf.load('../configs/generate_defaults.yaml')
     config = OmegaConf.merge(conf_file, conf_cli)
     return config
 
 if __name__ == "__main__":   
-    cfg = OmegaConf.from_cli()
+    cfg = load_config()
     device = torch.device(f"cuda:0" if torch.cuda.is_available() else "cpu")
     pipe = StableDiffusion3Pipeline.from_pretrained("stabilityai/stable-diffusion-3-medium-diffusers", torch_dtype=torch.float16)
-    if 'offload' in cfg and cfg.offload:
+    if cfg.offload:
         print("OFFLOADING")
         pipe.text_encoder = pipe.text_encoder.to(device)
         pipe.text_encoder_2 = pipe.text_encoder_2.to(device)
@@ -36,8 +35,8 @@ if __name__ == "__main__":
         prompt=[src_prompt] * 20,
         negative_prompt="",
         num_inference_steps=50,
-        height=512,
-        width=512,
+        height=cfg.imsize,
+        width=cfg.imsize,
         guidance_scale=8.5
     ).images
     os.makedirs('corgi-results', exist_ok=True)
