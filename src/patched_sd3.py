@@ -27,7 +27,7 @@ def calc_v_sd3_patched(pipe, src_tar_latent_model_input, src_tar_prompt_embeds, 
 
         pipe.transformer.transformer_blocks[10].attn.processor.to_patching_mode()
         noise_pred_tar = pipe.transformer(
-            hidden_states=src_tar_latent_model_input.chunk(2)[0],
+            hidden_states=src_tar_latent_model_input.chunk(2)[1],
             timestep=timestep.chunk(2)[0],
             encoder_hidden_states=src_tar_prompt_embeds.chunk(2)[0],
             pooled_projections=src_tar_pooled_prompt_embeds.chunk(2)[0],
