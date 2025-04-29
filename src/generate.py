@@ -13,10 +13,10 @@ def load_config():
     return config
 
 if __name__ == "__main__":   
-    #cfg = load_config()
+    cfg = OmegaConf.from_cli()
     device = torch.device(f"cuda:0" if torch.cuda.is_available() else "cpu")
     pipe = StableDiffusion3Pipeline.from_pretrained("stabilityai/stable-diffusion-3-medium-diffusers", torch_dtype=torch.float16)
-    if False:
+    if 'offload' in cfg and cfg.offload:
         print("OFFLOADING")
         pipe.text_encoder = pipe.text_encoder.to(device)
         pipe.text_encoder_2 = pipe.text_encoder_2.to(device)
