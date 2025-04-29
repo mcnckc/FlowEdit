@@ -80,7 +80,7 @@ class PatchedJointAttnProcessor2_0:
             if attn.norm_added_k is not None:
                 encoder_hidden_states_key_proj = attn.norm_added_k(encoder_hidden_states_key_proj)
 
-            if self.patching and 50 - self.cache_pos <= 27:
+            if self.patching and 50 - self.cache_pos <= 33:
                 encoder_hidden_states_key_proj = self.cached_key[self.cache_pos]
                 encoder_hidden_states_value_proj = self.cached_value[self.cache_pos]
                 print('Patched ', encoder_hidden_states_key_proj.shape)
