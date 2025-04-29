@@ -27,8 +27,10 @@ if __name__ == "__main__":
     else:
         print("NO OFFLOAD")
         pipe = pipe.to(device)
-    src_prompt = "KEEP CALM AND CARRY ON, image contains text that reads \"KEEP CALM AND CARRY ON\""
-    tar_prompt = "KEEP Salt AND CARRY ON, image contains text that reads \"KEEP Salt AND CARRY ON\""
+    #src_prompt = "KEEP CALM AND CARRY ON, image contains text that reads \"KEEP CALM AND CARRY ON\""
+    #tar_prompt = "KEEP Salt AND CARRY ON, image contains text that reads \"KEEP Salt AND CARRY ON\""
+    src_prompt = "A cute dog, holding a sign with text \"FOOD\""
+    tar_prompt = "A cute dog, holding a sign with text \"HELLO\""
     latents = pipe.prepare_latents(
         1,
         pipe.transformer.config.in_channels,
