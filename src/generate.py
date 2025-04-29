@@ -2,7 +2,7 @@ import torch
 from diffusers import StableDiffusion3Pipeline
 from omegaconf import OmegaConf
 from diffusers.hooks import apply_group_offloading
-from .patched_attention2 import PatchedJointAttnProcessor2_0
+from patched_attention2 import PatchedJointAttnProcessor2_0
 
 def load_config():
     conf_cli = OmegaConf.from_cli()
