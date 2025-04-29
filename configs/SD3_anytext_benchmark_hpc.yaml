@@ -1,10 +1,10 @@
 device_number: 0
-offload_half_layers: True
+offload_half_layers: False
 model_type: "SD3"
 exps:
   -
     exp_name: "FlowEdit_SD3"
-    dataset_yaml: anytext-bench-long.yaml
+    dataset_yaml: anytext-bench.yaml
     sampler_type: "FlowEditSD3"
     T_steps: 50
     n_avg: 1
