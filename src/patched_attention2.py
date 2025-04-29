@@ -67,28 +67,32 @@ class PatchedJointAttnProcessor2_0:
                 encoder_hidden_states_query_proj = attn.norm_added_q(encoder_hidden_states_query_proj)
             query = torch.cat([query, encoder_hidden_states_query_proj], dim=2)
             
-            if self.patching:
+            encoder_hidden_states_key_proj = attn.add_k_proj(encoder_hidden_states)
+            encoder_hidden_states_value_proj = attn.add_v_proj(encoder_hidden_states)
+
+            encoder_hidden_states_key_proj = encoder_hidden_states_key_proj.view(
+                batch_size, -1, attn.heads, head_dim
+            ).transpose(1, 2)
+            encoder_hidden_states_value_proj = encoder_hidden_states_value_proj.view(
+                batch_size, -1, attn.heads, head_dim
+            ).transpose(1, 2)
+
+            if attn.norm_added_k is not None:
+                encoder_hidden_states_key_proj = attn.norm_added_k(encoder_hidden_states_key_proj)
+
+            if self.patching and 50 - self.cache_pos <= 27:
                 encoder_hidden_states_key_proj = self.cached_key[self.cache_pos]
                 encoder_hidden_states_value_proj = self.cached_value[self.cache_pos]
-                self.cache_pos += 1
                 print('Patched ', encoder_hidden_states_key_proj.shape)
-            else:
-                encoder_hidden_states_key_proj = attn.add_k_proj(encoder_hidden_states)
-                encoder_hidden_states_value_proj = attn.add_v_proj(encoder_hidden_states)
-
-                encoder_hidden_states_key_proj = encoder_hidden_states_key_proj.view(
-                    batch_size, -1, attn.heads, head_dim
-                ).transpose(1, 2)
-                encoder_hidden_states_value_proj = encoder_hidden_states_value_proj.view(
-                    batch_size, -1, attn.heads, head_dim
-                ).transpose(1, 2)
-
-                if attn.norm_added_k is not None:
-                    encoder_hidden_states_key_proj = attn.norm_added_k(encoder_hidden_states_key_proj)
-                
+            elif not self.patching:
                 self.cached_key.append(encoder_hidden_states_key_proj)
                 self.cached_value.append(encoder_hidden_states_value_proj)
                 print('cached ', self.cached_key[-1].shape)
+            else:
+                print("skipped patching")
+            
+            if self.patching:
+                self.cache_pos += 1
             
             key = torch.cat([key, encoder_hidden_states_key_proj], dim=2)
             value = torch.cat([value, encoder_hidden_states_value_proj], dim=2)
