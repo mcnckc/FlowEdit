@@ -1,6 +1,6 @@
 import torch
 from diffusers import StableDiffusion3Pipeline
-import OmegaConf
+from omegaconf import OmegaConf
 from diffusers.hooks import apply_group_offloading
 
 def load_config():
