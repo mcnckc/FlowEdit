@@ -30,6 +30,7 @@ if __name__ == "__main__":
 
     src_prompt = "Corgi dog with a sign saying \"food\""
     tar_prompt = "Corgi dog with a sign saying \"Hello\""
+    """
     os.makedirs('corgi-results', exist_ok=True)
     for i in range(20):
         im = pipe(
@@ -41,26 +42,26 @@ if __name__ == "__main__":
             guidance_scale=8.5
         ).images[0]
         im.save('corgi-results/' + str(i) + '.png')
+    """
     #src_prompt = "KEEP CALM AND CARRY ON, image contains text that reads \"KEEP CALM AND CARRY ON\""
     #tar_prompt = "KEEP Salt AND CARRY ON, image contains text that reads \"KEEP Salt AND CARRY ON\""
-    """
+    
     latents = pipe.prepare_latents(
         1,
         pipe.transformer.config.in_channels,
-        512,
-        512,
+        cfg.imsize,
+        cfg.imsize,
         pipe.dtype,
         device,
         generator=None
     )
-    CFG = 15
     src_im = pipe(
         prompt=src_prompt,
         negative_prompt="",
         num_inference_steps=50,
-        height=512,
-        width=512,
-        guidance_scale=CFG,
+        height=cfg.imsize,
+        width=cfg.imsize,
+        guidance_scale=cfg.cfg,
         latents=latents
     ).images[0]
 
@@ -70,9 +71,9 @@ if __name__ == "__main__":
         prompt=tar_prompt,
         negative_prompt="",
         num_inference_steps=50,
-        height=512,
-        width=512,
-        guidance_scale=CFG,
+        height=cfg.imsize,
+        width=cfg.imsize,
+        guidance_scale=cfg.cfg,
         latents=latents
     ).images[0]
     pipe.transformer.transformer_blocks[10].attn.processor.to_patching_mode()
@@ -80,12 +81,13 @@ if __name__ == "__main__":
         prompt=src_prompt,
         negative_prompt="",
         num_inference_steps=50,
-        height=512,
-        width=512,
-        guidance_scale=CFG,
+        height=cfg.imsize,
+        width=cfg.imsize,
+        guidance_scale=cfg.cfg,
         latents=latents
     ).images[0]
-    src_im.save("src.png")
-    mid_im.save("mid.png")
-    tar_im.save("tar.png")
-    """
+    os.makedirs('corgi-results', exist_ok=True)
+    src_im.save("corgi-results/src.png")
+    mid_im.save("corgi-results/mid.png")
+    tar_im.save("corgi-results/tar.png")
+    
