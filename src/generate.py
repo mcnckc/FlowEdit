@@ -2,6 +2,7 @@ import torch
 from diffusers import StableDiffusion3Pipeline
 from omegaconf import OmegaConf
 from diffusers.hooks import apply_group_offloading
+from .patched_attention2 import PatchedJointAttnProcessor2_0
 
 def load_config():
     conf_cli = OmegaConf.from_cli()
@@ -26,7 +27,8 @@ if __name__ == "__main__":
     else:
         print("NO OFFLOAD")
         pipe = pipe.to(device)
-
+    src_prompt = "KEEP CALM AND CARRY ON, image contains text that reads \"KEEP CALM AND CARRY ON\""
+    tar_prompt = "KEEP Salt AND CARRY ON, image contains text that reads \"KEEP Salt AND CARRY ON\""
     latents = pipe.prepare_latents(
         1,
         pipe.transformer.config.in_channels,
@@ -36,17 +38,8 @@ if __name__ == "__main__":
         device,
         generator=None
     )
-    image = pipe(
-        prompt="KEEP CALM AND CARRY ON, image contains text that reads \"KEEP CALM AND CARRY ON\"",
-        negative_prompt="",
-        num_inference_steps=50,
-        height=512,
-        width=512,
-        guidance_scale=7.0,
-        latents=latents
-    ).images[0]
-    image2 = pipe(
-        prompt="KEEP Salt AND CARRY ON, image contains text that reads \"KEEP Salt AND CARRY ON\"",
+    src_im = pipe(
+        prompt=src_prompt,
         negative_prompt="",
         num_inference_steps=50,
         height=512,
@@ -55,5 +48,26 @@ if __name__ == "__main__":
         latents=latents
     ).images[0]
 
-    image.save("src.png")
-    image2.save("tar.png")
+    pipe.transformer.transformer_blocks[10].attn.set_processor(PatchedJointAttnProcessor2_0(mode='caching'))
+    pipe.transformer.transformer_blocks[10].attn.processor.to_caching_mode()
+    _ = pipe(
+        prompt=tar_prompt,
+        negative_prompt="",
+        num_inference_steps=50,
+        height=512,
+        width=512,
+        guidance_scale=7.0,
+        latents=latents
+    ).images[0]
+    pipe.transformer.transformer_blocks[10].attn.processor.to_patching_mode()
+    tar_im = pipe(
+        prompt=src_prompt,
+        negative_prompt="",
+        num_inference_steps=50,
+        height=512,
+        width=512,
+        guidance_scale=7.0,
+        latents=latents
+    ).images[0]
+    src_im.save("src.png")
+    tar_im.save("tar.png")
