@@ -21,9 +21,9 @@ def calc_v_sd3_patched(pipe, src_tar_latent_model_input, src_tar_prompt_embeds, 
         )[0]
 
         # perform guidance source
-        if pipe.do_classifier_free_guidance:
-            src_noise_pred_uncond, src_noise_pred_text, _, _ = noise_pred_src_tar.chunk(4)
-            noise_pred_src = src_noise_pred_uncond + src_guidance_scale * (src_noise_pred_text - src_noise_pred_uncond)
+        #if pipe.do_classifier_free_guidance:
+        src_noise_pred_uncond, src_noise_pred_text, _, _ = noise_pred_src_tar.chunk(4)
+        noise_pred_src = src_noise_pred_uncond + src_guidance_scale * (src_noise_pred_text - src_noise_pred_uncond)
 
         pipe.transformer.transformer_blocks[10].attn.processor.to_patching_mode()
         noise_pred_tar = pipe.transformer(
@@ -35,8 +35,8 @@ def calc_v_sd3_patched(pipe, src_tar_latent_model_input, src_tar_prompt_embeds, 
             return_dict=False,
         )[0]
 
-        if pipe.do_classifier_free_guidance:
-            tar_noise_pred_uncond, tar_noise_pred_text = noise_pred_tar.chunk(2)
-            noise_pred_tar = tar_noise_pred_uncond + tar_guidance_scale * (tar_noise_pred_text - tar_noise_pred_uncond)
+        #if pipe.do_classifier_free_guidance:
+        tar_noise_pred_uncond, tar_noise_pred_text = noise_pred_tar.chunk(2)
+        noise_pred_tar = tar_noise_pred_uncond + tar_guidance_scale * (tar_noise_pred_text - tar_noise_pred_uncond)
 
     return noise_pred_src, noise_pred_tar

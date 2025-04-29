@@ -30,10 +30,10 @@ def calc_v_sd3(pipe, src_tar_latent_model_input, src_tar_prompt_embeds, src_tar_
         )[0]
 
         # perform guidance source
-        if pipe.do_classifier_free_guidance:
-            src_noise_pred_uncond, src_noise_pred_text, tar_noise_pred_uncond, tar_noise_pred_text = noise_pred_src_tar.chunk(4)
-            noise_pred_src = src_noise_pred_uncond + src_guidance_scale * (src_noise_pred_text - src_noise_pred_uncond)
-            noise_pred_tar = tar_noise_pred_uncond + tar_guidance_scale * (tar_noise_pred_text - tar_noise_pred_uncond)
+        #if pipe.do_classifier_free_guidance:
+        src_noise_pred_uncond, src_noise_pred_text, tar_noise_pred_uncond, tar_noise_pred_text = noise_pred_src_tar.chunk(4)
+        noise_pred_src = src_noise_pred_uncond + src_guidance_scale * (src_noise_pred_text - src_noise_pred_uncond)
+        noise_pred_tar = tar_noise_pred_uncond + tar_guidance_scale * (tar_noise_pred_text - tar_noise_pred_uncond)
 
     return noise_pred_src, noise_pred_tar
 
@@ -127,7 +127,7 @@ def FlowEditSD3(pipe,
 
                 zt_tar = zt_edit + zt_src - x_src
 
-                src_tar_latent_model_input = torch.cat([zt_src, zt_src, zt_tar, zt_tar]) if pipe.do_classifier_free_guidance else (zt_src, zt_tar) 
+                src_tar_latent_model_input = torch.cat([zt_src, zt_src, zt_tar, zt_tar]) if True else (zt_src, zt_tar) 
                 if scene_text_edit:
                     Vt_src, Vt_tar = calc_v_sd3_patched(pipe, src_tar_latent_model_input, src_tar_prompt_embeds, src_tar_pooled_prompt_embeds, src_guidance_scale, tar_guidance_scale, t)
                 else:
