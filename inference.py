@@ -80,7 +80,7 @@ if __name__ == "__main__":
         for data_dict in dataset_configs:
             tar_prompts = data_dict["target_prompts"]
 
-        for data_dict in tqdm(dataset_configs):
+        for data_dict in tqdm(dataset_configs[:cfg.max_edits]):
 
             src_prompt = data_dict["source_prompt"]
             tar_prompts = data_dict["target_prompts"]
