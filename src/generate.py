@@ -30,17 +30,16 @@ if __name__ == "__main__":
 
     src_prompt = "Corgi dog with a sign saying \"food\""
     tar_prompt = "Corgi dog with a sign saying \"Hello\""
-
-    ims = pipe(
-        prompt=[src_prompt] * 20,
-        negative_prompt="",
-        num_inference_steps=50,
-        height=cfg.imsize,
-        width=cfg.imsize,
-        guidance_scale=8.5
-    ).images
     os.makedirs('corgi-results', exist_ok=True)
-    for i, im in enumerate(ims):
+    for i in range(20):
+        im = pipe(
+            prompt=src_prompt,
+            negative_prompt="",
+            num_inference_steps=50,
+            height=cfg.imsize,
+            width=cfg.imsize,
+            guidance_scale=8.5
+        ).images[0]
         im.save('corgi-results/' + str(i) + '.png')
     #src_prompt = "KEEP CALM AND CARRY ON, image contains text that reads \"KEEP CALM AND CARRY ON\""
     #tar_prompt = "KEEP Salt AND CARRY ON, image contains text that reads \"KEEP Salt AND CARRY ON\""
