@@ -42,7 +42,7 @@ if __name__ == "__main__":
     ).images
     os.makedirs('corgi-results', exist_ok=True)
     for i, im in enumerate(ims):
-        im.save(str(i) + '.png')
+        im.save('corgi-results/' + str(i) + '.png')
     #src_prompt = "KEEP CALM AND CARRY ON, image contains text that reads \"KEEP CALM AND CARRY ON\""
     #tar_prompt = "KEEP Salt AND CARRY ON, image contains text that reads \"KEEP Salt AND CARRY ON\""
     """
