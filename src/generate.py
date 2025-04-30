@@ -2,6 +2,7 @@ import torch
 from diffusers import StableDiffusion3Pipeline
 from omegaconf import OmegaConf
 from diffusers.hooks import apply_group_offloading
+from diffusers.models.attention_processor import JointAttnProcessor2_0
 from patched_attention2 import PatchedJointAttnProcessor2_0
 import os
 
@@ -45,49 +46,53 @@ if __name__ == "__main__":
     """
     #src_prompt = "KEEP CALM AND CARRY ON, image contains text that reads \"KEEP CALM AND CARRY ON\""
     #tar_prompt = "KEEP Salt AND CARRY ON, image contains text that reads \"KEEP Salt AND CARRY ON\""
-    
+    cfgs = [1, 5, 10, 15, 20]
+    nmaxs = list(range(45, 51))
     latents = pipe.prepare_latents(
-        1,
-        pipe.transformer.config.in_channels,
-        cfg.imsize,
-        cfg.imsize,
-        pipe.dtype,
-        device,
-        generator=None
+            1,
+            pipe.transformer.config.in_channels,
+            cfg.imsize,
+            cfg.imsize,
+            pipe.dtype,
+            device,
+            generator=None
     )
-    src_im = pipe(
-        prompt=src_prompt,
-        negative_prompt="",
-        num_inference_steps=50,
-        height=cfg.imsize,
-        width=cfg.imsize,
-        guidance_scale=cfg.cfg,
-        latents=latents
-    ).images[0]
-
-    pipe.transformer.transformer_blocks[10].attn.set_processor(PatchedJointAttnProcessor2_0(mode='caching'))
-    pipe.transformer.transformer_blocks[10].attn.processor.to_caching_mode()
-    mid_im = pipe(
-        prompt=tar_prompt,
-        negative_prompt="",
-        num_inference_steps=50,
-        height=cfg.imsize,
-        width=cfg.imsize,
-        guidance_scale=cfg.cfg,
-        latents=latents
-    ).images[0]
-    pipe.transformer.transformer_blocks[10].attn.processor.to_patching_mode()
-    tar_im = pipe(
-        prompt=src_prompt,
-        negative_prompt="",
-        num_inference_steps=50,
-        height=cfg.imsize,
-        width=cfg.imsize,
-        guidance_scale=cfg.cfg,
-        latents=latents
-    ).images[0]
     os.makedirs('corgi-results', exist_ok=True)
-    src_im.save("corgi-results/src.png")
-    mid_im.save("corgi-results/mid.png")
-    tar_im.save("corgi-results/tar.png")
+    for cur_cfg in cfgs:
+        pipe.transformer.transformer_blocks[10].attn.set_processor(JointAttnProcessor2_0())
+        src_im = pipe(
+            prompt=src_prompt,
+            negative_prompt="",
+            num_inference_steps=50,
+            height=cfg.imsize,
+            width=cfg.imsize,
+            guidance_scale=cur_cfg,
+            latents=latents
+        ).images[0]
+        pipe.transformer.transformer_blocks[10].attn.set_processor(PatchedJointAttnProcessor2_0(mode='caching', patching_step=50))
+        pipe.transformer.transformer_blocks[10].attn.processor.to_caching_mode()
+        mid_im = pipe(
+            prompt=tar_prompt,
+            negative_prompt="",
+            num_inference_steps=50,
+            height=cfg.imsize,
+            width=cfg.imsize,
+            guidance_scale=cur_cfg,
+            latents=latents
+        ).images[0]
+        for nmax in nmaxs:
+            pipe.transformer.transformer_blocks[10].attn.processor.to_patching_mode()
+            pipe.transformer.transformer_blocks[10].attn.processor.patching_step = nmax
+            tar_im = pipe(
+                prompt=src_prompt,
+                negative_prompt="",
+                num_inference_steps=50,
+                height=cfg.imsize,
+                width=cfg.imsize,
+                guidance_scale=cur_cfg,
+                latents=latents
+            ).images[0]
+            src_im.save(f"corgi-results/src-{cur_cfg}-{nmax}.png")
+            mid_im.save(f"corgi-results/mid-{cur_cfg}-{nmax}.png")
+            tar_im.save(f"corgi-results/tar-{cur_cfg}-{nmax}.png")
     
