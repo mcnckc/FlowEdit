@@ -92,7 +92,8 @@ if __name__ == "__main__":
                 guidance_scale=cur_cfg,
                 latents=latents
             ).images[0]
-            src_im.save(f"corgi-results/src-{cur_cfg}-{nmax}.png")
-            mid_im.save(f"corgi-results/mid-{cur_cfg}-{nmax}.png")
-            tar_im.save(f"corgi-results/tar-{cur_cfg}-{nmax}.png")
+            tar_im.save(f"corgi-results/tar-cfg{cur_cfg}-nmax{nmax}.png")
+        src_im.save(f"corgi-results/src-cfg{cur_cfg}.png")
+        mid_im.save(f"corgi-results/mid-cfg{cur_cfg}.png")
+            
     
