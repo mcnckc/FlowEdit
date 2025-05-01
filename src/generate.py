@@ -117,8 +117,8 @@ if __name__ == "__main__":
                 guidance_scale=cur_cfg,
                 latents=latents2
             ).images[0]
-            src_im2.save(f"corgi-results/src-cfg{cur_cfg}-2.png")
-            
+            src_im2.save(f"corgi-results/src-cfg{cur_cfg}-{i + 2}.png")
+
         src_im.save(f"corgi-results/src-cfg{cur_cfg}-1.png")
         
             
