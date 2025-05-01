@@ -57,18 +57,9 @@ if __name__ == "__main__":
             device,
             generator=None
     )
-    latents2 = pipe.prepare_latents(
-            1,
-            pipe.transformer.config.in_channels,
-            cfg.imsize,
-            cfg.imsize,
-            pipe.dtype,
-            device,
-            generator=None
-    )
     os.makedirs('corgi-results', exist_ok=True)
     for cur_cfg in cfgs:
-        cur_path = 'corgi-results/' + cur_cfg
+        cur_path = 'corgi-results/' + str(cur_cfg)
         os.makedirs(cur_path, exist_ok=True)
         pipe.transformer.transformer_blocks[10].attn.set_processor(JointAttnProcessor2_0())
         src_im = pipe(
@@ -79,15 +70,6 @@ if __name__ == "__main__":
             width=cfg.imsize,
             guidance_scale=cur_cfg,
             latents=latents
-        ).images[0]
-        src_im2 = pipe(
-            prompt=src_prompt,
-            negative_prompt="",
-            num_inference_steps=50,
-            height=cfg.imsize,
-            width=cfg.imsize,
-            guidance_scale=cur_cfg,
-            latents=latents2
         ).images[0]
         pipe.transformer.transformer_blocks[10].attn.set_processor(PatchedJointAttnProcessor2_0(mode='caching', patching_step=50))
         pipe.transformer.transformer_blocks[10].attn.processor.to_caching_mode()
@@ -116,7 +98,28 @@ if __name__ == "__main__":
         src_im.save(f"{cur_path}/src-cfg{cur_cfg}.png")
         mid_im.save(f"{cur_path}/mid-cfg{cur_cfg}.png")
 
+        for i in range(2):
+            latents2 = pipe.prepare_latents(
+                    1,
+                    pipe.transformer.config.in_channels,
+                    cfg.imsize,
+                    cfg.imsize,
+                    pipe.dtype,
+                    device,
+                    generator=None
+            )
+            src_im2 = pipe(
+                prompt=src_prompt,
+                negative_prompt="",
+                num_inference_steps=50,
+                height=cfg.imsize,
+                width=cfg.imsize,
+                guidance_scale=cur_cfg,
+                latents=latents2
+            ).images[0]
+            src_im2.save(f"corgi-results/src-cfg{cur_cfg}-2.png")
+            
         src_im.save(f"corgi-results/src-cfg{cur_cfg}-1.png")
-        src_im2.save(f"corgi-results/src-cfg{cur_cfg}-2.png")
+        
             
     
