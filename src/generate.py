@@ -59,9 +59,9 @@ if __name__ == "__main__":
     )
     os.makedirs('corgi-results', exist_ok=True)
     for cur_cfg in cfgs:
-        """
         cur_path = 'corgi-results/' + str(cur_cfg)
         os.makedirs(cur_path, exist_ok=True)
+        """
         pipe.transformer.transformer_blocks[10].attn.set_processor(JointAttnProcessor2_0())
         src_im = pipe(
             prompt=src_prompt,
