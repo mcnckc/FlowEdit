@@ -59,6 +59,7 @@ if __name__ == "__main__":
     )
     os.makedirs('corgi-results', exist_ok=True)
     for cur_cfg in cfgs:
+        """
         cur_path = 'corgi-results/' + str(cur_cfg)
         os.makedirs(cur_path, exist_ok=True)
         pipe.transformer.transformer_blocks[10].attn.set_processor(JointAttnProcessor2_0())
@@ -72,7 +73,8 @@ if __name__ == "__main__":
             latents=latents
         ).images[0]
         src_im.save(f"corgi-results/src-cfg{cur_cfg}-1.png")
-        for i in range(2):
+        """
+        for i in range(10):
             latents2 = pipe.prepare_latents(
                     1,
                     pipe.transformer.config.in_channels,
@@ -91,8 +93,8 @@ if __name__ == "__main__":
                 guidance_scale=cur_cfg,
                 latents=latents2
             ).images[0]
-            src_im2.save(f"corgi-results/src-cfg{cur_cfg}-{i + 2}.png")
-        
+            src_im2.save(f"corgi-results/{cur_cfg}/src-cfg{cur_cfg}-{i + 1}.png")
+        """
         pipe.transformer.transformer_blocks[10].attn.set_processor(PatchedJointAttnProcessor2_0(mode='caching', patching_step=50))
         pipe.transformer.transformer_blocks[10].attn.processor.to_caching_mode()
         mid_im = pipe(
@@ -119,6 +121,7 @@ if __name__ == "__main__":
             tar_im.save(f"{cur_path}/tar-cfg{cur_cfg}-nmax{nmax}.png")
         src_im.save(f"{cur_path}/src-cfg{cur_cfg}.png")
         mid_im.save(f"{cur_path}/mid-cfg{cur_cfg}.png")
+        """
         
             
     
