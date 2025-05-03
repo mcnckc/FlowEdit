@@ -1,0 +1,12 @@
+-
+    input_img: FlowEdit-benchmark/001253639.jpg
+    source_prompt: >-
+        Country is in your Heart not your Closet tank top, image contains text that reads "Country isin your Heart not your Closet"
+    target_prompts:
+    - >-
+        Country is in your FIRED not your Closet tank top, image contains text that reads "Country isin your FIRED not your Closet"
+    target_codes:
+    - >-
+        001253639.jpg-Heart-to-FIRED
+    - >-
+        001253639.jpg-your-to-worn
