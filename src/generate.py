@@ -29,10 +29,10 @@ if __name__ == "__main__":
         print("NO OFFLOAD")
         pipe = pipe.to(device)
 
-    #src_prompt = "Corgi dog with a sign saying \"food\""
-    #tar_prompt = "Corgi dog with a sign saying \"Hello\""
-    src_prompt = "Road sign with text \"Singapore\" on it"
-    tar_prompt = "Road sign with text \"Localize\" on it"
+    src_prompt = "Corgi dog with a sign saying \"food\""
+    tar_prompt = "Text \"Hello\""
+    #src_prompt = "Road sign with text \"Singapore\" on it"
+    #tar_prompt = "Road sign with text \"Localize\" on it"
     """
     os.makedirs('corgi-results', exist_ok=True)
     for i in range(20):
@@ -49,15 +49,15 @@ if __name__ == "__main__":
     #src_prompt = "KEEP CALM AND CARRY ON, image contains text that reads \"KEEP CALM AND CARRY ON\""
     #tar_prompt = "KEEP Salt AND CARRY ON, image contains text that reads \"KEEP Salt AND CARRY ON\""
     #cfgs = [5, 6, 7, 8, 9, 10, 11]
-    cfgs = [7, 8, 9]
-    nmaxs = list(range(25, 51))
-    for smp in range(4):
+    cfgs = [7, 8, 9, 10]
+    nmaxs = list(range(40, 51))
+    for smp in range(2):
         latents = pipe.prepare_latents(
                 1,
                 pipe.transformer.config.in_channels,
                 cfg.imsize,
                 cfg.imsize,
-                pipe.dtype,
+                pipe.type,
                 device,
                 generator=None
         )
