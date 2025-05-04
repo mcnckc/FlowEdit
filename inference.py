@@ -151,7 +151,7 @@ if __name__ == "__main__":
                             images_dir = "results"
                             os.makedirs(images_dir, exist_ok=True)
                             fname = os.path.basename(image_src_path).split('.')
-                            image_tar[0].save(f"{images_dir}/{fname[0]}-{src_guidance_scale}-{tar_guidance_scale}-{nmax}.{fname[1]}")
+                            image_tar[0].save(f"{images_dir}/{fname[0]}-{src_guidance_scale}-{tar_guidance_scale}-{n_max}.{fname[1]}")
                             #image_tar[0].save(f"{save_dir}/output_T_steps_{T_steps}_n_avg_{n_avg}_cfg_enc_{src_guidance_scale}_cfg_dec{tar_guidance_scale}_n_min_{n_min}_n_max_{n_max}_seed{seed}.png")
                             # also save source and target prompt in txt file
                             with open(f"{save_dir}/prompts.txt", "w") as f:
