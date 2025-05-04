@@ -1,12 +1,10 @@
 -
-    input_img: FlowEdit-benchmark/001253639.jpg
+    input_img: FlowEdit-benchmark/001254211.jpg
     source_prompt: >-
-        Country is in your Heart not your Closet tank top, image contains text that reads "Country isin your Heart not your Closet"
+        THE ARMADA boy, by Kate Ellis, image contains text that reads "Kate Ellis THE ARMADA BOY"
     target_prompts:
     - >-
-        Country is in your FIRED not your Closet tank top, image contains text that reads "Country isin your FIRED not your Closet"
+        ship ARMADA boy, by Kate Ellis, image contains text that reads "Kate Ellis ship ARMADA BOY"
     target_codes:
     - >-
-        001253639.jpg-Heart-to-FIRED
-    - >-
-        001253639.jpg-your-to-worn
+        001254211.jpg-THE-to-ship
