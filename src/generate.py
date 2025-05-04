@@ -30,7 +30,7 @@ if __name__ == "__main__":
         pipe = pipe.to(device)
 
     src_prompt = "Corgi dog with a sign saying \"food\""
-    tar_prompt = "Text \"Hello\""
+    tar_prompt = "Corgi dog with a sign saying \"hello\""
     #src_prompt = "Road sign with text \"Singapore\" on it"
     #tar_prompt = "Road sign with text \"Localize\" on it"
     """
@@ -49,8 +49,10 @@ if __name__ == "__main__":
     #src_prompt = "KEEP CALM AND CARRY ON, image contains text that reads \"KEEP CALM AND CARRY ON\""
     #tar_prompt = "KEEP Salt AND CARRY ON, image contains text that reads \"KEEP Salt AND CARRY ON\""
     #cfgs = [5, 6, 7, 8, 9, 10, 11]
-    cfgs = [7, 8, 9, 10]
+    cfgs = [7, 7.5, 8, 8.5, 9, 10]
     nmaxs = list(range(40, 51))
+    layers = [8, 9, 10, 11, 12]
+    layers_confs = [layers, [10]]
     for smp in range(2):
         latents = pipe.prepare_latents(
                 1,
@@ -61,37 +63,14 @@ if __name__ == "__main__":
                 device,
                 generator=None
         )
-        cur_path = 'corgi-results/' + str(smp)
-        os.makedirs(cur_path, exist_ok=True)
-        for cur_cfg in cfgs:
-             
+        for layers in layers_confs:
+            cur_path = 'corgi-results/' + str(smp)
             os.makedirs(cur_path, exist_ok=True)
-            pipe.transformer.transformer_blocks[10].attn.set_processor(JointAttnProcessor2_0())
-            src_im = pipe(
-                prompt=src_prompt,
-                negative_prompt="",
-                num_inference_steps=50,
-                height=cfg.imsize,
-                width=cfg.imsize,
-                guidance_scale=cur_cfg,
-                latents=latents
-            ).images[0]
-            
-            pipe.transformer.transformer_blocks[10].attn.set_processor(PatchedJointAttnProcessor2_0(mode='caching', patching_step=50))
-            pipe.transformer.transformer_blocks[10].attn.processor.to_caching_mode()
-            mid_im = pipe(
-                prompt=tar_prompt,
-                negative_prompt="",
-                num_inference_steps=50,
-                height=cfg.imsize,
-                width=cfg.imsize,
-                guidance_scale=cur_cfg,
-                latents=latents
-            ).images[0]
-            for nmax in nmaxs:
-                pipe.transformer.transformer_blocks[10].attn.processor.to_patching_mode()
-                pipe.transformer.transformer_blocks[10].attn.processor.patching_step = nmax
-                tar_im = pipe(
+            for cur_cfg in cfgs:
+                os.makedirs(cur_path, exist_ok=True)
+                for layer in layers:
+                    pipe.transformer.transformer_blocks[layer].attn.set_processor(JointAttnProcessor2_0())
+                src_im = pipe(
                     prompt=src_prompt,
                     negative_prompt="",
                     num_inference_steps=50,
@@ -100,9 +79,38 @@ if __name__ == "__main__":
                     guidance_scale=cur_cfg,
                     latents=latents
                 ).images[0]
-                tar_im.save(f"{cur_path}/tar-cfg{cur_cfg}-nmax{nmax}.png")
-            src_im.save(f"{cur_path}/src-cfg{cur_cfg}.png")
-            mid_im.save(f"{cur_path}/mid-cfg{cur_cfg}.png")
+                
+                for layer in layers:
+                    pipe.transformer.transformer_blocks[layer].attn.set_processor(PatchedJointAttnProcessor2_0(mode='caching', patching_step=50))
+                    pipe.transformer.transformer_blocks[layer].attn.processor.to_caching_mode()
+                mid_im = pipe(
+                    prompt=tar_prompt,
+                    negative_prompt="",
+                    num_inference_steps=50,
+                    height=cfg.imsize,
+                    width=cfg.imsize,
+                    guidance_scale=cur_cfg,
+                    latents=latents
+                ).images[0]
+                for nmax in nmaxs:
+                    for layer in layers:
+                        pipe.transformer.transformer_blocks[layers].attn.processor.to_patching_mode()
+                        pipe.transformer.transformer_blocks[layers].attn.processor.patching_step = nmax
+                    tar_im = pipe(
+                        prompt=src_prompt,
+                        negative_prompt="",
+                        num_inference_steps=50,
+                        height=cfg.imsize,
+                        width=cfg.imsize,
+                        guidance_scale=cur_cfg,
+                        latents=latents
+                    ).images[0]
+                    tar_im.save(f"{cur_path}/tar-cfg{cur_cfg}-nmax{nmax}-ls{len(layers)}.png")
+                for layer in layers:
+                    pipe.transformer.transformer_blocks[layer].attn.set_processor(JointAttnProcessor2_0())
+            
+                src_im.save(f"{cur_path}/src-cfg{cur_cfg}.png")
+                mid_im.save(f"{cur_path}/mid-cfg{cur_cfg}.png")
         
         
             
