@@ -59,7 +59,7 @@ if __name__ == "__main__":
                 pipe.transformer.config.in_channels,
                 cfg.imsize,
                 cfg.imsize,
-                pipe.type,
+                pipe.dtype,
                 device,
                 generator=None
         )
