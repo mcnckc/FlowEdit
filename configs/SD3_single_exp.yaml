@@ -11,6 +11,6 @@ exps:
     src_guidance_scale: [1, 3, 6, 9]
     tar_guidance_scale: [5, 6, 7, 9, 11]
     n_min: 0
-    n_max: [25, 26, 27, 28, 29, 30, 31, 32, 33, 34, 35, 36]
+    n_max: [25, 26, 27, 28, 29, 30, 31, 32, 33, 34, 35, 36, 38, 40, 42, 44]
     seed: 179
     scene_text_edit: True
