@@ -94,8 +94,8 @@ if __name__ == "__main__":
                 ).images[0]
                 for nmax in nmaxs:
                     for layer in layers:
-                        pipe.transformer.transformer_blocks[layers].attn.processor.to_patching_mode()
-                        pipe.transformer.transformer_blocks[layers].attn.processor.patching_step = nmax
+                        pipe.transformer.transformer_blocks[layer].attn.processor.to_patching_mode()
+                        pipe.transformer.transformer_blocks[layer].attn.processor.patching_step = nmax
                     tar_im = pipe(
                         prompt=src_prompt,
                         negative_prompt="",
