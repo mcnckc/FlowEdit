@@ -56,8 +56,11 @@ if __name__ == "__main__":
     scheduler = pipe.scheduler
     print("LOADED TO GPU")
     for exp_id, exp_dict in enumerate(cfg.exps):
-        for src_guidance_scale in exp_dict["src_guidance_scale"]:
-            for tar_guidance_scale in exp_dict["tar_guidance_scale"]:
+        for tar_guidance_scale in exp_dict["tar_guidance_scale"]:
+            src_scales = list(set(exp_dict["src_guidance_scale"] + [tar_guidance_scale]))
+            for src_guidance_scale in src_scales:
+                if src_guidance_scale > tar_guidance_scale:
+                    continue
                 for n_max in exp_dict["n_max"]:
 
                     exp_name = exp_dict["exp_name"]

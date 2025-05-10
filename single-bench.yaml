@@ -1,10 +1,10 @@
 -
-    input_img: FlowEdit-benchmark/001254211.jpg
+    input_img: FlowEdit-benchmark/001258576.jpg
     source_prompt: >-
-        THE ARMADA boy, by Kate Ellis, image contains text that reads "Kate Ellis THE ARMADA BOY"
+        NEW esl LEAGUE COMING to the world, image contains text that reads "NEW eSPORTS LEAGUE COMING 2016 IMG"
     target_prompts:
     - >-
-        ship ARMADA boy, by Kate Ellis, image contains text that reads "Kate Ellis ship ARMADA BOY"
+        NEW esl LEAGUE treated to the world, image contains text that reads "NEW eSPORTS LEAGUE treated 2016 IMG"
     target_codes:
     - >-
-        001254211.jpg-THE-to-ship
+        001258576.jpg-COMING-to-treated
