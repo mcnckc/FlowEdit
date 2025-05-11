@@ -1,10 +1,10 @@
 -
-    input_img: FlowEdit-benchmark/001258576.jpg
+    input_img: FlowEdit-benchmark/001258478.jpg
     source_prompt: >-
-        NEW esl LEAGUE COMING to the world, image contains text that reads "NEW eSPORTS LEAGUE COMING 2016 IMG"
+        WordPress Website Transfer To html, image contains text that reads "WordPress Website Transfer To HTTPS"
     target_prompts:
     - >-
-        NEW esl LEAGUE treated to the world, image contains text that reads "NEW eSPORTS LEAGUE treated 2016 IMG"
+        Collected Website Transfer To html, image contains text that reads "Collected Website Transfer To HTTPS"
     target_codes:
     - >-
-        001258576.jpg-COMING-to-treated
+        001258478.jpg-Website-to-levels
