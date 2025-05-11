@@ -77,7 +77,7 @@ if __name__ == "__main__":
                 torch.cuda.manual_seed_all(seed)
                 dataset_yaml = exp_dict["dataset_yaml"]
                 with open(dataset_yaml) as file:
-                dataset_configs = yaml.load(file, Loader=yaml.FullLoader)
+                    dataset_configs = yaml.load(file, Loader=yaml.FullLoader)
 
                 # check dataset_configs 
                 for data_dict in dataset_configs:
