@@ -3,7 +3,7 @@ offload_half_layers: False
 model_type: "SD3"
 exps:
   -
-    exp_name: "single-bench"
+    exp_name: "single-bench-1"
     dataset_yaml: single-bench.yaml
     sampler_type: "FlowEditSD3"
     T_steps: 50

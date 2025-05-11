@@ -151,7 +151,7 @@ if __name__ == "__main__":
                             # make sure to create the directories before saving
                             save_dir = f"outputs/{exp_name}/{model_type}/src_{src_prompt_txt}/tar_{tar_prompt_txt}"
                             os.makedirs(save_dir, exist_ok=True)
-                            images_dir = "results"
+                            images_dir = "results/" + exp_name
                             os.makedirs(images_dir, exist_ok=True)
                             fname = os.path.basename(image_src_path).split('.')
                             image_tar[0].save(f"{images_dir}/{fname[0]}-{src_guidance_scale}-{tar_guidance_scale}-{n_max}.{fname[1]}")
