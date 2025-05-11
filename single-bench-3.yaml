@@ -1,10 +1,10 @@
 -
-    input_img: FlowEdit-benchmark/001254502.jpg
+    input_img: FlowEdit-benchmark/001259010.jpg
     source_prompt: >-
-        the logo for AMLING artisan jewelry, image contains text that reads "AMLING artisan jewelry"
+        nike tennessee titans 53 josh COMPTON navy blue vapor untouchable jersey, image contains text that reads "COMPTON E3 E3"
     target_prompts:
     - >-
-        the logo for AMLING artisan FEATURED, image contains text that reads "AMLING artisan FEATURED"
+        nike tennessee titans 53 josh arizona navy blue vapor untouchable jersey, image contains text that reads "arizona E3 E3"
     target_codes:
     - >-
-        001254502.jpg-jewelry-to-FEATURED
+        001259010.jpg-COMPTON-to-arizona

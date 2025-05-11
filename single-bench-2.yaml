@@ -1,10 +1,10 @@
 -
-    input_img: FlowEdit-benchmark/001256955.jpg
+    input_img: FlowEdit-benchmark/001259418.jpg
     source_prompt: >-
-        GOOSE CREEK SOUTH carolina classic mouse pad, image contains text that reads "GOOSE CREEK SOUTH CAROLINA,"
+        i WEAR blue for my Niece Rheumatoid Arthritis card, image contains text that reads "WEAR for my Niece Rheumatoid Arthritis Awareness"
     target_prompts:
     - >-
-        FUND CREEK SOUTH carolina classic mouse pad, image contains text that reads "FUND CREEK SOUTH CAROLINA,"
+        i WEAR blue for my Niece Rheumatoid Fraction card, image contains text that reads "WEAR for my Niece Rheumatoid Fraction Awareness"
     target_codes:
     - >-
-        001256955.jpg-GOOSE-to-FUND
+        001259418.jpg-Arthritis-to-Fraction

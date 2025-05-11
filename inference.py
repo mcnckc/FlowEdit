@@ -8,7 +8,7 @@ import random
 import numpy as np
 import yaml
 import os
-from src.flowedit_sd3 import FlowEditSD3
+from src.flowedit_sd3 import FlowEditSD3, FlowEditSD3Embeds, get_text_embeds
 from src.flowedit_flux import FlowEditFLUX
 from tqdm import tqdm
 
@@ -61,58 +61,60 @@ if __name__ == "__main__":
             for src_guidance_scale in src_scales:
                 if src_guidance_scale > tar_guidance_scale:
                     continue
-                for n_max in exp_dict["n_max"]:
+                
 
-                    exp_name = exp_dict["exp_name"]
-                    # model_type = exp_dict["model_type"]
-                    T_steps = exp_dict["T_steps"]
-                    n_avg = exp_dict["n_avg"]
-                    n_min = exp_dict["n_min"]
-                    seed = exp_dict["seed"]
-                    scene_text_edit = exp_dict.scene_text_edit
-                    # set seed
-                    random.seed(seed)
-                    np.random.seed(seed)
-                    torch.manual_seed(seed)
-                    torch.cuda.manual_seed_all(seed)
-                    dataset_yaml = exp_dict["dataset_yaml"]
-                    with open(dataset_yaml) as file:
-                        dataset_configs = yaml.load(file, Loader=yaml.FullLoader)
+                exp_name = exp_dict["exp_name"]
+                # model_type = exp_dict["model_type"]
+                T_steps = exp_dict["T_steps"]
+                n_avg = exp_dict["n_avg"]
+                n_min = exp_dict["n_min"]
+                seed = exp_dict["seed"]
+                scene_text_edit = exp_dict.scene_text_edit
+                # set seed
+                random.seed(seed)
+                np.random.seed(seed)
+                torch.manual_seed(seed)
+                torch.cuda.manual_seed_all(seed)
+                dataset_yaml = exp_dict["dataset_yaml"]
+                with open(dataset_yaml) as file:
+                dataset_configs = yaml.load(file, Loader=yaml.FullLoader)
 
-                    # check dataset_configs 
-                    for data_dict in dataset_configs:
-                        tar_prompts = data_dict["target_prompts"]
+                # check dataset_configs 
+                for data_dict in dataset_configs:
+                    tar_prompts = data_dict["target_prompts"]
 
-                    for data_dict in tqdm(dataset_configs[:cfg.max_edits] if 'max_edits' in cfg else dataset_configs):
+                for data_dict in tqdm(dataset_configs[:cfg.max_edits] if 'max_edits' in cfg else dataset_configs):
                     #for data_dict in tqdm(dataset_configs[7:8]):
-                        src_prompt = data_dict["source_prompt"]
-                        tar_prompts = data_dict["target_prompts"]
-                        print("SRC:", src_prompt)
-                        print("TGT:", tar_prompts)
-                        negative_prompt =  "" # optionally add support for negative prompts (SD3)
-                        image_src_path = data_dict["input_img"]
+                    src_prompt = data_dict["source_prompt"]
+                    tar_prompts = data_dict["target_prompts"]
+                    print("SRC:", src_prompt)
+                    print("TGT:", tar_prompts)
+                    negative_prompt =  "" # optionally add support for negative prompts (SD3)
+                    image_src_path = data_dict["input_img"]
 
                         # load image
-                        image = Image.open(image_src_path)
+                    image = Image.open(image_src_path)
                         # crop image to have both dimensions divisibe by 16 - avoids issues with resizing
-                        image = image.crop((0, 0, image.width - image.width % 16, image.height - image.height % 16))
-                        image_src = pipe.image_processor.preprocess(image)
+                    image = image.crop((0, 0, image.width - image.width % 16, image.height - image.height % 16))
+                    image_src = pipe.image_processor.preprocess(image)
                         # cast image to half precision
-                        image_src = image_src.to(device).half()
-                        with torch.autocast("cuda"), torch.inference_mode():
-                            x0_src_denorm = pipe.vae.encode(image_src).latent_dist.mode()
-                        x0_src = (x0_src_denorm - pipe.vae.config.shift_factor) * pipe.vae.config.scaling_factor
-                        # send to cuda
-                        x0_src = x0_src.to(device)
+                    image_src = image_src.to(device).half()
+                    with torch.autocast("cuda"), torch.inference_mode():
+                        x0_src_denorm = pipe.vae.encode(image_src).latent_dist.mode()
+                    x0_src = (x0_src_denorm - pipe.vae.config.shift_factor) * pipe.vae.config.scaling_factor
+                    # send to cuda
+                    x0_src = x0_src.to(device)
                         
-                        for tar_num, tar_prompt in enumerate(tar_prompts):
+                    for tar_num, tar_prompt in enumerate(tar_prompts):
+                        text_embs, text_pooled_embs = get_text_embeds(pipe, src_prompt, tar_prompt, src_guidance_scale, tar_guidance_scale)
+                        for n_max in exp_dict["n_max"]:
                             print("START EDIT")
                             if model_type == 'SD3':
-                                x0_tar = FlowEditSD3(pipe,
+                                x0_tar = FlowEditSD3Embeds(pipe,
                                                                         scheduler,
                                                                         x0_src,
-                                                                        src_prompt,
-                                                                        tar_prompt,
+                                                                        text_embs,
+                                                                        text_pooled_embs,
                                                                         negative_prompt,
                                                                         T_steps,
                                                                         n_avg,
