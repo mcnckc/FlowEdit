@@ -1,0 +1,10 @@
+-
+    input_img: FlowEdit-benchmark/001254502.jpg
+    source_prompt: >-
+        the logo for AMLING artisan jewelry, image contains text that reads "AMLING artisan jewelry"
+    target_prompts:
+    - >-
+        the logo for AMLING artisan FEATURED, image contains text that reads "AMLING artisan FEATURED"
+    target_codes:
+    - >-
+        001254502.jpg-jewelry-to-FEATURED
