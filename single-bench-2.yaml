@@ -1,0 +1,10 @@
+-
+    input_img: FlowEdit-benchmark/001256955.jpg
+    source_prompt: >-
+        GOOSE CREEK SOUTH carolina classic mouse pad, image contains text that reads "GOOSE CREEK SOUTH CAROLINA,"
+    target_prompts:
+    - >-
+        FUND CREEK SOUTH carolina classic mouse pad, image contains text that reads "FUND CREEK SOUTH CAROLINA,"
+    target_codes:
+    - >-
+        001256955.jpg-GOOSE-to-FUND
