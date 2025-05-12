@@ -1,10 +1,10 @@
 -
-    input_img: FlowEdit-benchmark/001258478.jpg
+    input_img: FlowEdit-benchmark/001259298.jpg
     source_prompt: >-
-        image contains text that reads "WordPress Website Transfer To HTTPS"
+        a red mug with the words MUTTER WAS designed SUPER kratte, image contains text that reads "ICH BIN MUTTER WAS SIND DEINE SUPER KRAFTE?!"
     target_prompts:
     - >-
-        image contains text that reads "Collected Website Transfer To HTTPS"
+        a red mug with the words fashion WAS designed SUPER kratte, image contains text that reads "ICH BIN fashion WAS SIND DEINE SUPER KRAFTE?!"
     target_codes:
     - >-
-        001258478.jpg-WordPress-to-Collected
+        001259298.jpg-MUTTER-to-fashion
