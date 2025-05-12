@@ -1,0 +1,10 @@
+-
+    input_img: FlowEdit-benchmark/001253877.jpg
+    source_prompt: >-
+        ellie Beth logo, image contains text that reads "Ellic Beth"
+    target_prompts:
+    - >-
+        ellie aged logo, image contains text that reads "Ellic aged"
+    target_codes:
+    - >-
+        001253877.jpg-Beth-to-aged

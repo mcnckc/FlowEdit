@@ -1,0 +1,10 @@
+-
+    input_img: FlowEdit-benchmark/001253873.jpg
+    source_prompt: >-
+        DARK ROOM ESCAPE GAME, image contains text that reads "DARK ROOM ESCAPE GAME"
+    target_prompts:
+    - >-
+        DARK ROOM ESCAPE scott, image contains text that reads "DARK ROOM ESCAPE scott"
+    target_codes:
+    - >-
+        001253873.jpg-GAME-to-scott
