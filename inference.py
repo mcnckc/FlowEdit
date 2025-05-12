@@ -106,7 +106,7 @@ if __name__ == "__main__":
                     x0_src = x0_src.to(device)
                         
                     for tar_num, tar_prompt in enumerate(tar_prompts):
-                        text_embs, text_pooled_embs = get_text_embeds(pipe, src_prompt, tar_prompt, src_guidance_scale, tar_guidance_scale)
+                        text_embs, text_pooled_embs = get_text_embeds(pipe, scheduler, src_prompt, tar_prompt, negative_prompt, T_steps, src_guidance_scale, tar_guidance_scale)
                         for n_max in exp_dict["n_max"]:
                             print("START EDIT")
                             if model_type == 'SD3':
