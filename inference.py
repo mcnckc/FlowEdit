@@ -40,7 +40,7 @@ if __name__ == "__main__":
         if cfg.offload_half_layers:
             print("OFFLOADING")
             pipe.text_encoder = pipe.text_encoder.to(device)
-            pipe.text_encoder_2 = pipe.text_encoder_2.to(device)
+            #pipe.text_encoder_2 = pipe.text_encoder_2.to(device)
             pipe.vae = pipe.vae.to(device)
             apply_group_offloading(pipe.text_encoder_2, onload_device=device, offload_device=torch.device('cpu'), 
                                             offload_type="block_level", num_blocks_per_group=2, use_stream=True)
