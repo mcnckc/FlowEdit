@@ -42,10 +42,12 @@ if __name__ == "__main__":
             pipe.text_encoder = pipe.text_encoder.to(device)
             pipe.text_encoder_2 = pipe.text_encoder_2.to(device)
             pipe.vae = pipe.vae.to(device)
+            apply_group_offloading(pipe.text_encoder_2, onload_device=device, offload_device=torch.device('cpu'), 
+                                            offload_type="block_level", num_blocks_per_group=4, use_stream=True)
             apply_group_offloading(pipe.text_encoder_3, onload_device=device, offload_device=torch.device('cpu'), 
-                                            offload_type="block_level", num_blocks_per_group=8, use_stream=True)
+                                            offload_type="block_level", num_blocks_per_group=4, use_stream=True)
             apply_group_offloading(pipe.transformer, onload_device=device, offload_device=torch.device('cpu'), 
-                                            offload_type="block_level", num_blocks_per_group=8, use_stream=True)
+                                            offload_type="block_level", num_blocks_per_group=4, use_stream=True)
         else:
             print("NO OFFLOAD")
             pipe = pipe.to(device)
