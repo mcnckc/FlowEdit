@@ -166,7 +166,7 @@ def FlowEditSD3(pipe,
     return zt_edit if n_min == 0 else xt_tar
 
 
-def get_text_embeds(pipe, schedler, x_src, src_prompt, tar_prompt, negative_prompt, T_steps, src_guidance_scale,
+def get_text_embeds(pipe, scheduler, x_src, src_prompt, tar_prompt, negative_prompt, T_steps, src_guidance_scale,
     tar_guidance_scale):
     device = x_src.device
 
