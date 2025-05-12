@@ -1,10 +1,10 @@
 -
-    input_img: FlowEdit-benchmark/001257980.jpg
+    input_img: FlowEdit-benchmark/001258478.jpg
     source_prompt: >-
-        mad miami gangster Town, image contains text that reads "mad miami Town"
+        image contains text that reads "WordPress Website Transfer To HTTPS"
     target_prompts:
     - >-
-        mad SPITE gangster Town, image contains text that reads "mad SPITE Town"
+        image contains text that reads "Collected Website Transfer To HTTPS"
     target_codes:
     - >-
-        001257980.jpg-miami-to-SPITE
+        001258478.jpg-WordPress-to-Collected
