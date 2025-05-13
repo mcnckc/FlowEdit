@@ -9,6 +9,7 @@ import numpy as np
 import yaml
 import os
 from src.flowedit_sd3 import FlowEditSD3, FlowEditSD3Embeds, get_text_embeds
+from src.flowedit_rf_sd3 import FlowEditRFSD3
 from src.flowedit_flux import FlowEditFLUX
 from tqdm import tqdm
 
@@ -112,11 +113,26 @@ if __name__ == "__main__":
                         for n_max in exp_dict["n_max"]:
                             print("START EDIT")
                             if model_type == 'SD3':
+                                """
                                 x0_tar = FlowEditSD3Embeds(pipe,
                                                                         scheduler,
                                                                         x0_src,
                                                                         text_embs,
                                                                         text_pooled_embs,
+                                                                        negative_prompt,
+                                                                        T_steps,
+                                                                        n_avg,
+                                                                        src_guidance_scale,
+                                                                        tar_guidance_scale,
+                                                                        n_min,
+                                                                        n_max,
+                                                                        scene_text_edit=scene_text_edit)
+                                """
+                                x0_tar = FlowEditRFSD3(pipe,
+                                                                        scheduler,
+                                                                        x0_src,
+                                                                        src_prompt,
+                                                                        tar_prompt,
                                                                         negative_prompt,
                                                                         T_steps,
                                                                         n_avg,
