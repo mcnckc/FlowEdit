@@ -34,7 +34,7 @@ def rf_v_sd3(z, pipe, prompt_embeds, pooled_prompt_embeds, guidance_scale, rt, l
     zmid = z + v * dt
     vmid = calc_v_sd3(pipe, torch.cat([zmid, zmid]), prompt_embeds, pooled_prompt_embeds, guidance_scale, rt + dt)
     dv = (vmid - v) / dt
-    return (rt - lt) * v + 1 / 2 * (rt - lt) ** 2 * dv
+    return (lt - rt) * v + 1 / 2 * (lt - rt) ** 2 * dv
 
 
 @torch.no_grad()
@@ -106,7 +106,6 @@ def FlowEditRFSD3(pipe,
     print("EDIT LOOP")
     print(len(timesteps))
     print(timesteps)
-    return
     for i, t in tqdm(enumerate(timesteps)):
         
         if T_steps - i > n_max:
@@ -117,7 +116,8 @@ def FlowEditRFSD3(pipe,
             t_im1 = (timesteps[i+1])/1000
         else:
             t_im1 = torch.zeros_like(t_i).to(t_i.device)
-        
+        print("TS:", t_i, t_im1)
+        return
         if T_steps - i > n_min:
 
             # Calculate the average of the V predictions
@@ -131,19 +131,14 @@ def FlowEditRFSD3(pipe,
                 zt_tar = zt_edit + zt_src - x_src
 
                 src_tar_latent_model_input = torch.cat([zt_src, zt_src, zt_tar, zt_tar]) if True else (zt_src, zt_tar) 
-                v_src = rf_v_sd3(x_src, pipe, src_tar_prompt_embeds.chunk(2)[0], src_tar_pooled_prompt_embeds.chunk(2)[1], src_guidance_scale, )
-                if scene_text_edit:
-                    Vt_src, Vt_tar = calc_v_sd3_patched(pipe, src_tar_latent_model_input, src_tar_prompt_embeds, src_tar_pooled_prompt_embeds, src_guidance_scale, tar_guidance_scale, t)
-                else:
-                    print('casual')
-                    Vt_src, Vt_tar = calc_v_sd3(pipe, src_tar_latent_model_input, src_tar_prompt_embeds, src_tar_pooled_prompt_embeds, src_guidance_scale, tar_guidance_scale, t)
-                print("DIFF:", (Vt_tar - Vt_src).abs().mean())
-                V_delta_avg += (1/n_avg) * (Vt_tar - Vt_src) # - (hfg-1)*( x_src))
+                v_src = rf_v_sd3(zt_src, pipe, src_tar_prompt_embeds.chunk(2)[0], src_tar_pooled_prompt_embeds.chunk(2)[0], src_guidance_scale, t_i, t_im1)
+                v_tar = rf_v_sd3(zt_tar, pipe, src_tar_prompt_embeds.chunk(2)[1], src_tar_pooled_prompt_embeds.chunk(2)[1], tar_guidance_scale, t_i, t_im1)
+                V_delta_avg += (1/n_avg) * (v_tar - v_src)
 
             # propagate direct ODE
             zt_edit = zt_edit.to(torch.float32)
 
-            zt_edit = zt_edit + (t_im1 - t_i) * V_delta_avg
+            zt_edit = zt_edit + V_delta_avg
             
             zt_edit = zt_edit.to(V_delta_avg.dtype)
 
