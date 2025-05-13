@@ -1,10 +1,10 @@
 -
-    input_img: FlowEdit-benchmark/001257417.jpg
+    input_img: FlowEdit-benchmark/001256066.jpg
     source_prompt: >-
-        THE MACHINE stops by e m forester, image contains text that reads "THE MACHINE STOP- by Forster"
+        a smiley face WITH the words, obsessed with awards, image contains text that reads "OBSESS WITH"
     target_prompts:
     - >-
-        THE SECURITY stops by e m forester, image contains text that reads "THE SECURITY STOP- by Forster"
+        a smiley face Trace the words, obsessed with awards, image contains text that reads "OBSESS Trace"
     target_codes:
     - >-
-        001257417.jpg-MACHINE-to-SECURITY
+        001256066.jpg-WITH-to-Trace
