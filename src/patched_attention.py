@@ -83,9 +83,12 @@ class PatchedJointAttnProcessor2_0:
 
                 if attn.norm_added_k is not None:
                     encoder_hidden_states_key_proj = attn.norm_added_k(encoder_hidden_states_key_proj)
-                
-                self.cached_key = encoder_hidden_states_key_proj.chunk(2)[-1]
-                self.cached_value = encoder_hidden_states_value_proj.chunk(2)[-1]
+                if self.save_last_half:
+                    self.cached_key = encoder_hidden_states_key_proj.chunk(2)[-1]
+                    self.cached_value = encoder_hidden_states_value_proj.chunk(2)[-1]
+                else:
+                    self.cached_key = encoder_hidden_states_key_proj
+                    self.cached_value = encoder_hidden_states_value_proj
                 print('Patched ', self.cached_key.shape)
             
             key = torch.cat([key, encoder_hidden_states_key_proj], dim=2)

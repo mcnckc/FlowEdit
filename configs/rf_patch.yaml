@@ -4,7 +4,7 @@ model_type: "SD3"
 use_rf: True
 exps:
   -
-    exp_name: "single-bench-rf"
+    exp_name: "single-bench-rf-patch"
     dataset_yaml: single-bench.yaml
     sampler_type: "FlowEditSD3"
     T_steps: 50
@@ -14,4 +14,4 @@ exps:
     n_min: 0
     n_max: [35]
     seed: 179
-    scene_text_edit: False
+    scene_text_edit: True
