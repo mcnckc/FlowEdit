@@ -8,7 +8,7 @@ import numpy as np
 import yaml
 import os
 from FlowEdit_utils import FlowEditSD3, FlowEditFLUX
-
+from diffusers.hooks import apply_group_offloading
 
 
 if __name__ == "__main__":
@@ -40,7 +40,16 @@ if __name__ == "__main__":
         raise NotImplementedError(f"Model type {model_type} not implemented")
     
     scheduler = pipe.scheduler
-    pipe = pipe.to(device)
+    pipe.text_encoder = pipe.text_encoder.to(device)
+    
+    pipe.vae = pipe.vae.to(device)
+    apply_group_offloading(pipe.text_encoder_2, onload_device=device, offload_device=torch.device('cpu'), 
+                                            offload_type="block_level", num_blocks_per_group=2, use_stream=True)
+    apply_group_offloading(pipe.text_encoder_3, onload_device=device, offload_device=torch.device('cpu'), 
+                                            offload_type="block_level", num_blocks_per_group=2, use_stream=True)
+    apply_group_offloading(pipe.transformer, onload_device=device, offload_device=torch.device('cpu'), 
+                                            offload_type="block_level", num_blocks_per_group=2, use_stream=True)
+    #pipe = pipe.to(device)
 
     for exp_dict in exp_configs:
 
