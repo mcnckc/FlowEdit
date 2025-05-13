@@ -12,6 +12,6 @@ exps:
     src_guidance_scale: []
     tar_guidance_scale: [6.5]
     n_min: 0
-    n_max: [50]
+    n_max: [44]
     seed: 179
     scene_text_edit: False
