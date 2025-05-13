@@ -1,6 +1,8 @@
 device_number: 0
 offload_half_layers: False
 model_type: "SD3"
+use_rf: True
+dtc: 2
 exps:
   -
     exp_name: "single-bench-5"
