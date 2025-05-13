@@ -1,10 +1,10 @@
 -
-    input_img: FlowEdit-benchmark/001254440.jpg
+    input_img: FlowEdit-benchmark/001255031.jpg
     source_prompt: >-
-        hvac depot METAL MANUFACTURING logo, image contains text that reads "AC METAL MANUFACTURING"
+        a television with the words PET NAMES missing connections, image contains text that reads "PET NAMES "Missed Connections""
     target_prompts:
     - >-
-        hvac depot policy MANUFACTURING logo, image contains text that reads "AC policy MANUFACTURING"
+        a television with the words bbc NAMES missing connections, image contains text that reads "bbc NAMES "Missed Connections""
     target_codes:
     - >-
-        001254440.jpg-METAL-to-policy
+        001255031.jpg-PET-to-bbc

@@ -1,10 +1,10 @@
 -
-    input_img: FlowEdit-benchmark/001253686.jpg
+    input_img: FlowEdit-benchmark/001257451.jpg
     source_prompt: >-
-        the logo for the NEBRASKA STATE FAIR, image contains text that reads "150 NEBRASKA STATE FAIR"
+        UNFAITHFUL MUSIC - ELVIS COSTELLO, image contains text that reads "ELVIS COSTELLO UNFAITHFUL MUSIC SOUNDTRACK ALBUM"
     target_prompts:
     - >-
-        the logo for the NEBRASKA STATE york, image contains text that reads "150 NEBRASKA STATE york"
+        UNFAITHFUL MUSIC - ELVIS delegates, image contains text that reads "ELVIS delegates UNFAITHFUL MUSIC SOUNDTRACK ALBUM"
     target_codes:
     - >-
-        001253686.jpg-FAIR-to-york
+        001257451.jpg-COSTELLO-to-delegates

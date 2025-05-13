@@ -1,10 +1,10 @@
 -
-    input_img: FlowEdit-benchmark/001259298.jpg
+    input_img: FlowEdit-benchmark/001257417.jpg
     source_prompt: >-
-        a red mug with the words MUTTER WAS designed SUPER kratte, image contains text that reads "ICH BIN MUTTER WAS SIND DEINE SUPER KRAFTE?!"
+        THE MACHINE stops by e m forester, image contains text that reads "THE MACHINE STOP- by Forster"
     target_prompts:
     - >-
-        a red mug with the words fashion WAS designed SUPER kratte, image contains text that reads "ICH BIN fashion WAS SIND DEINE SUPER KRAFTE?!"
+        THE SECURITY stops by e m forester, image contains text that reads "THE SECURITY STOP- by Forster"
     target_codes:
     - >-
-        001259298.jpg-MUTTER-to-fashion
+        001257417.jpg-MACHINE-to-SECURITY
