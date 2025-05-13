@@ -160,11 +160,19 @@ if __name__ == "__main__":
                                 raise NotImplementedError(f"Sampler type {model_type} not implemented")
 
                             print("DONE edit")
+                            print("ABS:", (x0_src - x0_tar).abs().mean(), (x0_src - x0_tar).abs().max())
+                            print("RABS:", ((x0_src - x0_tar) / x0_src).abs().mean(), ((x0_src - x0_tar) / x0_src).abs().max())
                             x0_tar_denorm = (x0_tar / pipe.vae.config.scaling_factor) + pipe.vae.config.shift_factor
                             with torch.autocast("cuda"), torch.inference_mode():
                                 image_tar = pipe.vae.decode(x0_tar_denorm, return_dict=False)[0]
                             image_tar = pipe.image_processor.postprocess(image_tar)
 
+                            with torch.autocast("cuda"), torch.inference_mode():
+                                image_src = pipe.vae.decode(x0_src_denorm, return_dict=False)[0]
+                            image_src = pipe.image_processor.postprocess(image_src)
+
+                            image_src.save("res-src.jpg")
+                            image_tar.save("res-tar.jpg")
                             src_prompt_txt = data_dict["input_img"].split("/")[-1].split(".")[0]
 
                             tar_prompt_txt = str(tar_num)
