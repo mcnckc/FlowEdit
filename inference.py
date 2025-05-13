@@ -171,8 +171,9 @@ if __name__ == "__main__":
                                 image_src = pipe.vae.decode(x0_src_denorm, return_dict=False)[0]
                             image_src = pipe.image_processor.postprocess(image_src)
 
-                            image_src.save("res-src.jpg")
-                            image_tar.save("res-tar.jpg")
+                            print(image_tar, image_src)
+                            image_src[0].save("res-src.jpg")
+                            image_tar[0].save("res-tar.jpg")
                             src_prompt_txt = data_dict["input_img"].split("/")[-1].split(".")[0]
 
                             tar_prompt_txt = str(tar_num)
