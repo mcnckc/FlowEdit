@@ -125,6 +125,7 @@ if __name__ == "__main__":
                                                                             tar_guidance_scale,
                                                                             n_min,
                                                                             n_max,
+                                                                            cfg.dtc,
                                                                             scene_text_edit=scene_text_edit)
                                 else:
                                     #text_embs, text_pooled_embs = get_text_embeds(pipe, scheduler, x0_src, src_prompt, tar_prompt, negative_prompt, T_steps, src_guidance_scale, tar_guidance_scale)

@@ -1,10 +1,10 @@
 -
-    input_img: FlowEdit-benchmark/001255031.jpg
+    input_img: FlowEdit-benchmark/001259298.jpg
     source_prompt: >-
-        a television with the words PET NAMES missing connections, image contains text that reads "PET NAMES "Missed Connections""
+        a red mug with the words MUTTER WAS designed SUPER kratte, image contains text that reads "ICH BIN MUTTER WAS SIND DEINE SUPER KRAFTE?!"
     target_prompts:
     - >-
-        a television with the words bbc NAMES missing connections, image contains text that reads "bbc NAMES "Missed Connections""
+        a red mug with the words fashion WAS designed SUPER kratte, image contains text that reads "ICH BIN fashion WAS SIND DEINE SUPER KRAFTE?!"
     target_codes:
     - >-
-        001255031.jpg-PET-to-bbc
+        001259298.jpg-MUTTER-to-fashion

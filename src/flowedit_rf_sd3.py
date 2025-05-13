@@ -64,16 +64,16 @@ def calc_v_sd3_patched(pipe, tar_latent_model_input, src_tar_prompt_embeds, src_
 
     return noise_pred_tar
 
-def rf_v_sd3(z, pipe, prompt_embeds, pooled_prompt_embeds, guidance_scale, rt, lt):
-    dt = (lt - rt) / 2
+def rf_v_sd3(z, pipe, prompt_embeds, pooled_prompt_embeds, guidance_scale, rt, lt, dtc):
+    dt = (lt - rt) / dtc
     v = calc_v_sd3(pipe, torch.cat([z, z]), prompt_embeds, pooled_prompt_embeds, guidance_scale, rt * 1000)
     zmid = z + v * dt
     vmid = calc_v_sd3(pipe, torch.cat([zmid, zmid]), prompt_embeds, pooled_prompt_embeds, guidance_scale, (rt + dt) * 1000)
     dv = (vmid - v) / dt
     return (lt - rt) * v + 1 / 2 * ((lt - rt) ** 2) * dv
 
-def patched_rf_v_sd3(z, pipe, src_tar_prompt_embeds, src_tar_pooled_prompt_embeds, guidance_scale, rt, lt):
-    dt = (lt - rt) / 2
+def patched_rf_v_sd3(z, pipe, src_tar_prompt_embeds, src_tar_pooled_prompt_embeds, guidance_scale, rt, lt, dtc):
+    dt = (lt - rt) / dtc
     v = calc_v_sd3_patched(pipe, torch.cat([z, z]), src_tar_prompt_embeds, src_tar_pooled_prompt_embeds, guidance_scale, rt * 1000)
     zmid = z + v * dt
     vmid = calc_v_sd3_patched(pipe, torch.cat([zmid, zmid]), src_tar_prompt_embeds, src_tar_pooled_prompt_embeds, guidance_scale, (rt + dt) * 1000)
@@ -93,6 +93,7 @@ def FlowEditRFSD3(pipe,
     tar_guidance_scale: float = 13.5,
     n_min: int = 0,
     n_max: int = 15,
+    dtc: int = 2,
     scene_text_edit=True):
     
     device = x_src.device
@@ -173,11 +174,11 @@ def FlowEditRFSD3(pipe,
                 zt_tar = zt_edit + zt_src - x_src
 
                 src_tar_latent_model_input = torch.cat([zt_src, zt_src, zt_tar, zt_tar]) if True else (zt_src, zt_tar)
-                v_src = rf_v_sd3(zt_src, pipe, src_tar_prompt_embeds.chunk(2)[0], src_tar_pooled_prompt_embeds.chunk(2)[0], src_guidance_scale, t_i, t_im1)
+                v_src = rf_v_sd3(zt_src, pipe, src_tar_prompt_embeds.chunk(2)[0], src_tar_pooled_prompt_embeds.chunk(2)[0], src_guidance_scale, t_i, t_im1, dtc)
                 if scene_text_edit:
-                    v_tar = patched_rf_v_sd3(zt_tar, pipe, src_tar_prompt_embeds, src_tar_pooled_prompt_embeds, tar_guidance_scale, t_i, t_im1)
+                    v_tar = patched_rf_v_sd3(zt_tar, pipe, src_tar_prompt_embeds, src_tar_pooled_prompt_embeds, tar_guidance_scale, t_i, t_im1, dtc)
                 else:
-                    v_tar = rf_v_sd3(zt_tar, pipe, src_tar_prompt_embeds.chunk(2)[1], src_tar_pooled_prompt_embeds.chunk(2)[1], tar_guidance_scale, t_i, t_im1)
+                    v_tar = rf_v_sd3(zt_tar, pipe, src_tar_prompt_embeds.chunk(2)[1], src_tar_pooled_prompt_embeds.chunk(2)[1], tar_guidance_scale, t_i, t_im1, dtc)
                 #print("DIFF:", (v_tar - v_src).abs().max(), (v_tar - v_src).abs().mean())
                 V_delta_avg += (1/n_avg) * (v_tar - v_src)
 
