@@ -127,12 +127,12 @@ if __name__ == "__main__":
                                                                             n_max,
                                                                             scene_text_edit=scene_text_edit)
                                 else:
-                                    text_embs, text_pooled_embs = get_text_embeds(pipe, scheduler, x0_src, src_prompt, tar_prompt, negative_prompt, T_steps, src_guidance_scale, tar_guidance_scale)
-                                    x0_tar = FlowEditSD3Embeds(pipe,
+                                    #text_embs, text_pooled_embs = get_text_embeds(pipe, scheduler, x0_src, src_prompt, tar_prompt, negative_prompt, T_steps, src_guidance_scale, tar_guidance_scale)
+                                    x0_tar = FlowEditSD3(pipe,
                                                                             scheduler,
                                                                             x0_src,
-                                                                            text_embs,
-                                                                            text_pooled_embs,
+                                                                            src_prompt,
+                                                                            tar_prompt,
                                                                             negative_prompt,
                                                                             T_steps,
                                                                             n_avg,

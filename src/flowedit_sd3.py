@@ -61,6 +61,7 @@ def FlowEditSD3(pipe,
     pipe._guidance_scale = src_guidance_scale
     print("EDIT1")
     print("GUIDE", pipe.do_classifier_free_guidance)
+    print("CFG", src_guidance_scale, tar_guidance_scale)
     # src prompts
     (
         src_prompt_embeds,
