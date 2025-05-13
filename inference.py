@@ -112,8 +112,8 @@ if __name__ == "__main__":
                         for n_max in exp_dict["n_max"]:
                             print("START EDIT")
                             if model_type == 'SD3':
-                                #if cfg.use_rf:
-                                x0_tar = FlowEditRFSD3(pipe,
+                                if cfg.use_rf:
+                                    x0_tar = FlowEditRFSD3(pipe,
                                                                             scheduler,
                                                                             x0_src,
                                                                             src_prompt,
@@ -126,9 +126,9 @@ if __name__ == "__main__":
                                                                             n_min,
                                                                             n_max,
                                                                             scene_text_edit=scene_text_edit)
-                                #else:
-                                text_embs, text_pooled_embs = get_text_embeds(pipe, scheduler, x0_src, src_prompt, tar_prompt, negative_prompt, T_steps, src_guidance_scale, tar_guidance_scale)
-                                x0_tar2 = FlowEditSD3Embeds(pipe,
+                                else:
+                                    text_embs, text_pooled_embs = get_text_embeds(pipe, scheduler, x0_src, src_prompt, tar_prompt, negative_prompt, T_steps, src_guidance_scale, tar_guidance_scale)
+                                    x0_tar = FlowEditSD3Embeds(pipe,
                                                                             scheduler,
                                                                             x0_src,
                                                                             text_embs,
@@ -159,29 +159,19 @@ if __name__ == "__main__":
                             else:
                                 raise NotImplementedError(f"Sampler type {model_type} not implemented")
 
+                            """
                             print("DONE edit")
                             print("ABS:", (x0_src - x0_tar).abs().mean(), (x0_src - x0_tar).abs().max())
                             print("ABS:", (x0_src - x0_tar2).abs().mean(), (x0_src - x0_tar2).abs().max())
                             print("RABS:", ((x0_src - x0_tar) / x0_src).abs().mean(), ((x0_src - x0_tar) / x0_src).abs().max())
                             print("RABS:", ((x0_src - x0_tar2) / x0_src).abs().mean(), ((x0_src - x0_tar2) / x0_src).abs().max())
+                            """
                             x0_tar_denorm = (x0_tar / pipe.vae.config.scaling_factor) + pipe.vae.config.shift_factor
                             with torch.autocast("cuda"), torch.inference_mode():
                                 image_tar = pipe.vae.decode(x0_tar_denorm, return_dict=False)[0]
                             image_tar = pipe.image_processor.postprocess(image_tar)
 
-                            x0_tar_denorm2 = (x0_tar2 / pipe.vae.config.scaling_factor) + pipe.vae.config.shift_factor
-                            with torch.autocast("cuda"), torch.inference_mode():
-                                image_tar2 = pipe.vae.decode(x0_tar_denorm2, return_dict=False)[0]
-                            image_tar2 = pipe.image_processor.postprocess(image_tar2)
-
-                            with torch.autocast("cuda"), torch.inference_mode():
-                                image_src = pipe.vae.decode(x0_src_denorm, return_dict=False)[0]
-                            image_src = pipe.image_processor.postprocess(image_src)
-
-                            print(image_tar, image_src)
-                            image_src[0].save("res-src.jpg")
-                            image_tar[0].save("res-tar.jpg")
-                            image_tar2[0].save("res-tar2.jpg")
+                    
                             src_prompt_txt = data_dict["input_img"].split("/")[-1].split(".")[0]
 
                             tar_prompt_txt = str(tar_num)

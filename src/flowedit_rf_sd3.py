@@ -34,7 +34,7 @@ def rf_v_sd3(z, pipe, prompt_embeds, pooled_prompt_embeds, guidance_scale, rt, l
     zmid = z + v * dt
     vmid = calc_v_sd3(pipe, torch.cat([zmid, zmid]), prompt_embeds, pooled_prompt_embeds, guidance_scale, (rt + dt) * 1000)
     dv = (vmid - v) / dt
-    #return (lt - rt) * v + 1 / 2 * ((lt - rt) ** 2) * dv
+    return (lt - rt) * v + 1 / 2 * ((lt - rt) ** 2) * dv
     return (lt - rt) * v
 
 
@@ -133,15 +133,15 @@ def FlowEditRFSD3(pipe,
                 src_tar_latent_model_input = torch.cat([zt_src, zt_src, zt_tar, zt_tar]) if True else (zt_src, zt_tar) 
                 v_src = rf_v_sd3(zt_src, pipe, src_tar_prompt_embeds.chunk(2)[0], src_tar_pooled_prompt_embeds.chunk(2)[0], src_guidance_scale, t_i, t_im1)
                 v_tar = rf_v_sd3(zt_tar, pipe, src_tar_prompt_embeds.chunk(2)[1], src_tar_pooled_prompt_embeds.chunk(2)[1], tar_guidance_scale, t_i, t_im1)
-                print("DIFF:", (v_tar - v_src).abs().max(), (v_tar - v_src).abs().mean())
+                #print("DIFF:", (v_tar - v_src).abs().max(), (v_tar - v_src).abs().mean())
                 V_delta_avg += (1/n_avg) * (v_tar - v_src)
 
             # propagate direct ODE
             zt_edit = zt_edit.to(torch.float32)
 
             zt_edit = zt_edit + V_delta_avg
-            print("ZDIFF:", (zt_edit - x_src).abs().max(), (zt_edit - x_src).abs().mean())
-            print("RZDIFF:", ((zt_edit - x_src) / (x_src + 1e-7)).abs().max(), ((zt_edit - x_src) / (x_src + 1e-7)).abs().mean())
+            #print("ZDIFF:", (zt_edit - x_src).abs().max(), (zt_edit - x_src).abs().mean())
+            #print("RZDIFF:", ((zt_edit - x_src) / (x_src + 1e-7)).abs().max(), ((zt_edit - x_src) / (x_src + 1e-7)).abs().mean())
             zt_edit = zt_edit.to(V_delta_avg.dtype)
 
         else: # i >= T_steps-n_min # regular sampling for last n_min steps
