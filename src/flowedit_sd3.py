@@ -140,7 +140,6 @@ def FlowEditSD3(pipe,
             zt_edit = zt_edit.to(torch.float32)
 
             zt_edit = zt_edit + (t_im1 - t_i) * V_delta_avg
-            
             zt_edit = zt_edit.to(V_delta_avg.dtype)
 
         else: # i >= T_steps-n_min # regular sampling for last n_min steps

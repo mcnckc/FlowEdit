@@ -140,7 +140,8 @@ def FlowEditRFSD3(pipe,
             zt_edit = zt_edit.to(torch.float32)
 
             zt_edit = zt_edit + V_delta_avg
-            
+            print("ZDIFF:", (zt_edit - x_src).abs().max(), (zt_edit - x_src).abs().mean())
+            print("RZDIFF:", ((zt_edit - x_src) / (x_src + 1e-7)).abs().max(), ((zt_edit - x_src) / (x_src + 1e-7)).abs().mean())
             zt_edit = zt_edit.to(V_delta_avg.dtype)
 
         else: # i >= T_steps-n_min # regular sampling for last n_min steps
