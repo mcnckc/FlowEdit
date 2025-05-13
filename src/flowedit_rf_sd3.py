@@ -116,8 +116,7 @@ def FlowEditRFSD3(pipe,
             t_im1 = (timesteps[i+1])/1000
         else:
             t_im1 = torch.zeros_like(t_i).to(t_i.device)
-        print("TS:", t_i, t_im1)
-        return
+        
         if T_steps - i > n_min:
 
             # Calculate the average of the V predictions

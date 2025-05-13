@@ -1,10 +1,10 @@
 -
-    input_img: FlowEdit-benchmark/001257451.jpg
+    input_img: FlowEdit-benchmark/001259298.jpg
     source_prompt: >-
-        UNFAITHFUL MUSIC - ELVIS COSTELLO, image contains text that reads "ELVIS COSTELLO UNFAITHFUL MUSIC SOUNDTRACK ALBUM"
+        a red mug with the words MUTTER WAS designed SUPER kratte, image contains text that reads "ICH BIN MUTTER WAS SIND DEINE SUPER KRAFTE?!"
     target_prompts:
     - >-
-        UNFAITHFUL MUSIC - ELVIS delegates, image contains text that reads "ELVIS delegates UNFAITHFUL MUSIC SOUNDTRACK ALBUM"
+        a red mug with the words fashion WAS designed SUPER kratte, image contains text that reads "ICH BIN fashion WAS SIND DEINE SUPER KRAFTE?!"
     target_codes:
     - >-
-        001257451.jpg-COSTELLO-to-delegates
+        001259298.jpg-MUTTER-to-fashion

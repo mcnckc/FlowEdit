@@ -109,38 +109,39 @@ if __name__ == "__main__":
                     x0_src = x0_src.to(device)
                         
                     for tar_num, tar_prompt in enumerate(tar_prompts):
-                        #text_embs, text_pooled_embs = get_text_embeds(pipe, scheduler, x0_src, src_prompt, tar_prompt, negative_prompt, T_steps, src_guidance_scale, tar_guidance_scale)
                         for n_max in exp_dict["n_max"]:
                             print("START EDIT")
                             if model_type == 'SD3':
-                                """
-                                x0_tar = FlowEditSD3Embeds(pipe,
-                                                                        scheduler,
-                                                                        x0_src,
-                                                                        text_embs,
-                                                                        text_pooled_embs,
-                                                                        negative_prompt,
-                                                                        T_steps,
-                                                                        n_avg,
-                                                                        src_guidance_scale,
-                                                                        tar_guidance_scale,
-                                                                        n_min,
-                                                                        n_max,
-                                                                        scene_text_edit=scene_text_edit)
-                                """
-                                x0_tar = FlowEditRFSD3(pipe,
-                                                                        scheduler,
-                                                                        x0_src,
-                                                                        src_prompt,
-                                                                        tar_prompt,
-                                                                        negative_prompt,
-                                                                        T_steps,
-                                                                        n_avg,
-                                                                        src_guidance_scale,
-                                                                        tar_guidance_scale,
-                                                                        n_min,
-                                                                        n_max,
-                                                                        scene_text_edit=scene_text_edit)
+                                if cfg.use_rf:
+                                    x0_tar = FlowEditRFSD3(pipe,
+                                                                            scheduler,
+                                                                            x0_src,
+                                                                            src_prompt,
+                                                                            tar_prompt,
+                                                                            negative_prompt,
+                                                                            T_steps,
+                                                                            n_avg,
+                                                                            src_guidance_scale,
+                                                                            tar_guidance_scale,
+                                                                            n_min,
+                                                                            n_max,
+                                                                            scene_text_edit=scene_text_edit)
+                                else:
+                                    text_embs, text_pooled_embs = get_text_embeds(pipe, scheduler, x0_src, src_prompt, tar_prompt, negative_prompt, T_steps, src_guidance_scale, tar_guidance_scale)
+                                    x0_tar = FlowEditSD3Embeds(pipe,
+                                                                            scheduler,
+                                                                            x0_src,
+                                                                            text_embs,
+                                                                            text_pooled_embs,
+                                                                            negative_prompt,
+                                                                            T_steps,
+                                                                            n_avg,
+                                                                            src_guidance_scale,
+                                                                            tar_guidance_scale,
+                                                                            n_min,
+                                                                            n_max,
+                                                                            scene_text_edit=scene_text_edit)
+                                
                                 
                             elif model_type == 'FLUX':
                                 x0_tar = FlowEditFLUX(pipe,
