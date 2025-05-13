@@ -30,9 +30,9 @@ def calc_v_sd3(pipe, latent_model_input, prompt_embeds, pooled_prompt_embeds, gu
 
 def rf_v_sd3(z, pipe, prompt_embeds, pooled_prompt_embeds, guidance_scale, rt, lt):
     dt = (lt - rt) / 2
-    v = calc_v_sd3(pipe, torch.cat([z, z]), prompt_embeds, pooled_prompt_embeds, guidance_scale, rt)
+    v = calc_v_sd3(pipe, torch.cat([z, z]), prompt_embeds, pooled_prompt_embeds, guidance_scale, rt * 1000)
     zmid = z + v * dt
-    vmid = calc_v_sd3(pipe, torch.cat([zmid, zmid]), prompt_embeds, pooled_prompt_embeds, guidance_scale, rt + dt)
+    vmid = calc_v_sd3(pipe, torch.cat([zmid, zmid]), prompt_embeds, pooled_prompt_embeds, guidance_scale, (rt + dt) * 1000)
     dv = (vmid - v) / dt
     #return (lt - rt) * v + 1 / 2 * ((lt - rt) ** 2) * dv
     return (lt - rt) * v
