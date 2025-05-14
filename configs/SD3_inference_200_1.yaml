@@ -1,0 +1,21 @@
+device_number: 0
+offload_half_layers: False
+model_type: "SD3"
+use_rf: True
+dtc: 2
+v_cache_mode: "all_v"
+exps:
+  -
+    exp_name: "results-200-4.5-4.5-36"
+    dataset_yaml: anytext-bench-200.yaml
+    sampler_type: "FlowEditSD3"
+    T_steps: 50
+    n_avg: 1
+    src_guidance_scale: []
+    tar_guidance_scale: [4.5]
+    patch_v_layers: [0]
+    patch_v_steps: [0]
+    n_min: 0
+    n_max: [36]
+    seed: 179
+    scene_text_edit: True
