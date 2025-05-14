@@ -107,6 +107,7 @@ class PatchedJointAttnProcessor2_0:
                 if self.cache_mode == 'all_v':
                     value = self.cached_v
                     encoder_hidden_states_value_proj = self.cached_text_v
+                    print('Patched ALL V ')
                 if self.cache_mode == 'lv':
                     value = self.cached_v
             elif self.mode == 'caching':
@@ -118,6 +119,7 @@ class PatchedJointAttnProcessor2_0:
                         self.cached_key = encoder_hidden_states_key_proj
                         self.cached_value = encoder_hidden_states_value_proj
                 elif self.cache_mode == 'all_v':
+                    print("cached all v")
                     self.cached_v = value
                     self.cached_text_v = encoder_hidden_states_value_proj
                 elif self.cache_mode == 'lv':
