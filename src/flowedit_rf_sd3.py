@@ -180,19 +180,19 @@ def FlowEditRFSD3(pipe,
 
                 src_tar_latent_model_input = torch.cat([zt_src, zt_src, zt_tar, zt_tar]) if True else (zt_src, zt_tar)
                 if i < patch_v_steps:
-                    for i in range(patch_v_layers):
-                        pipe.transformer.transformer_blocks[-1 - i].attn.processor.to_caching_mode()
+                    for lid in range(patch_v_layers):
+                        pipe.transformer.transformer_blocks[-1 - lid].attn.processor.to_caching_mode()
                 v_src = rf_v_sd3(zt_src, pipe, src_tar_prompt_embeds.chunk(2)[0], src_tar_pooled_prompt_embeds.chunk(2)[0], src_guidance_scale, t_i, t_im1, dtc)
                 if i < patch_v_steps:
-                    for i in range(patch_v_layers):
-                        pipe.transformer.transformer_blocks[-1 - i].attn.processor.to_patching_mode()
+                    for lid in range(patch_v_layers):
+                        pipe.transformer.transformer_blocks[-1 - lid].attn.processor.to_patching_mode()
                 if scene_text_edit:
                     v_tar = patched_rf_v_sd3(zt_tar, pipe, src_tar_prompt_embeds, src_tar_pooled_prompt_embeds, tar_guidance_scale, t_i, t_im1, dtc)
                 else:
                     v_tar = rf_v_sd3(zt_tar, pipe, src_tar_prompt_embeds.chunk(2)[1], src_tar_pooled_prompt_embeds.chunk(2)[1], tar_guidance_scale, t_i, t_im1, dtc)
                 if i < patch_v_steps:
-                    for i in range(patch_v_layers):
-                        pipe.transformer.transformer_blocks[-1 - i].attn.processor.to_idle_mode()
+                    for lid in range(patch_v_layers):
+                        pipe.transformer.transformer_blocks[-1 - lid].attn.processor.to_idle_mode()
                 #print("DIFF:", (v_tar - v_src).abs().max(), (v_tar - v_src).abs().mean())
                 V_delta_avg += (1/n_avg) * (v_tar - v_src)
 
