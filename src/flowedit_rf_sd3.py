@@ -60,7 +60,7 @@ def calc_v_sd3_patched(pipe, tar_latent_model_input, src_tar_prompt_embeds, src_
         #if pipe.do_classifier_free_guidance:
         tar_noise_pred_uncond, tar_noise_pred_text = noise_pred_tar.chunk(2)
         noise_pred_tar = tar_noise_pred_uncond + tar_guidance_scale * (tar_noise_pred_text - tar_noise_pred_uncond)
-        pipe.transformer.transformer_blocks[10].attn.processor.to_caching_mode()
+        pipe.transformer.transformer_blocks[10].attn.processor.to_idle_mode()
 
     return noise_pred_tar
 
@@ -91,6 +91,9 @@ def FlowEditRFSD3(pipe,
     n_avg: int = 1,
     src_guidance_scale: float = 3.5,
     tar_guidance_scale: float = 13.5,
+    patch_v_layers: int = 0,
+    patch_v_steps: int = 0,
+    v_cache_mode: str = "",
     n_min: int = 0,
     n_max: int = 15,
     dtc: int = 2,
@@ -146,7 +149,9 @@ def FlowEditRFSD3(pipe,
     # initialize our ODE Zt_edit_1=x_src
     zt_edit = x_src.clone()
     if scene_text_edit:
-        pipe.transformer.transformer_blocks[10].attn.set_processor(PatchedJointAttnProcessor2_0(mode='caching', save_last_half=False))
+        pipe.transformer.transformer_blocks[10].attn.set_processor(PatchedJointAttnProcessor2_0(mode='idle', cache_mode='text_kv', save_last_half=False))
+    for i in range(patch_v_layers):
+        pipe.transformer.transformer_blocks[-1 - i].attn.set_processor(PatchedJointAttnProcessor2_0(mode='idle', cache_mode=v_cache_mode))
     print("EDIT LOOP")
     print(len(timesteps))
     print(timesteps)
@@ -174,11 +179,20 @@ def FlowEditRFSD3(pipe,
                 zt_tar = zt_edit + zt_src - x_src
 
                 src_tar_latent_model_input = torch.cat([zt_src, zt_src, zt_tar, zt_tar]) if True else (zt_src, zt_tar)
+                if i < patch_v_steps:
+                    for i in range(patch_v_layers):
+                        pipe.transformer.transformer_blocks[-1 - i].attn.processor.to_caching_mode()
                 v_src = rf_v_sd3(zt_src, pipe, src_tar_prompt_embeds.chunk(2)[0], src_tar_pooled_prompt_embeds.chunk(2)[0], src_guidance_scale, t_i, t_im1, dtc)
+                if i < patch_v_steps:
+                    for i in range(patch_v_layers):
+                        pipe.transformer.transformer_blocks[-1 - i].attn.processor.to_patching_mode()
                 if scene_text_edit:
                     v_tar = patched_rf_v_sd3(zt_tar, pipe, src_tar_prompt_embeds, src_tar_pooled_prompt_embeds, tar_guidance_scale, t_i, t_im1, dtc)
                 else:
                     v_tar = rf_v_sd3(zt_tar, pipe, src_tar_prompt_embeds.chunk(2)[1], src_tar_pooled_prompt_embeds.chunk(2)[1], tar_guidance_scale, t_i, t_im1, dtc)
+                if i < patch_v_steps:
+                    for i in range(patch_v_layers):
+                        pipe.transformer.transformer_blocks[-1 - i].attn.processor.to_idle_mode()
                 #print("DIFF:", (v_tar - v_src).abs().max(), (v_tar - v_src).abs().mean())
                 V_delta_avg += (1/n_avg) * (v_tar - v_src)
 

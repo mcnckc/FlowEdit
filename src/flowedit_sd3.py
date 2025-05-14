@@ -103,7 +103,7 @@ def FlowEditSD3(pipe,
     # initialize our ODE Zt_edit_1=x_src
     zt_edit = x_src.clone()
     if scene_text_edit:
-        pipe.transformer.transformer_blocks[10].attn.set_processor(PatchedJointAttnProcessor2_0(mode='caching'))
+        pipe.transformer.transformer_blocks[10].attn.set_processor(PatchedJointAttnProcessor2_0(mode='idle', cache_mode='text_kv'))
     print("EDIT LOOP")
     for i, t in tqdm(enumerate(timesteps)):
         

@@ -3,6 +3,7 @@ offload_half_layers: False
 model_type: "SD3"
 use_rf: True
 dtc: 2
+v_cache_mode: "lv"
 exps:
   -
     exp_name: "single-bench-2"
@@ -10,9 +11,11 @@ exps:
     sampler_type: "FlowEditSD3"
     T_steps: 50
     n_avg: 1
-    src_guidance_scale: [1]
+    src_guidance_scale: []
     tar_guidance_scale: [4.5, 6.5]
+    patch_v_layers: [0, 1, 2, 5, 13]
+    patch_v_steps: [0, 1, 2, 5, 10]
     n_min: 0
-    n_max: [26, 27, 28, 29, 30, 31, 32, 33, 34, 35, 36, 38, 37, 39, 40, 41, 42, 43, 44, 46]
+    n_max: [48, 50]
     seed: 179
     scene_text_edit: True

@@ -38,5 +38,5 @@ def calc_v_sd3_patched(pipe, src_tar_latent_model_input, src_tar_prompt_embeds, 
         #if pipe.do_classifier_free_guidance:
         tar_noise_pred_uncond, tar_noise_pred_text = noise_pred_tar.chunk(2)
         noise_pred_tar = tar_noise_pred_uncond + tar_guidance_scale * (tar_noise_pred_text - tar_noise_pred_uncond)
-
+        pipe.transformer.transformer_blocks[10].attn.processor.to_idle_mode()
     return noise_pred_src, noise_pred_tar
