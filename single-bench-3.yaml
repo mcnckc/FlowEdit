@@ -1,10 +1,10 @@
 -
-    input_img: FlowEdit-benchmark/001257928.jpg
+    input_img: FlowEdit-benchmark/001258236.jpg
     source_prompt: >-
-        THE cure TOUR 2016 poster, image contains text that reads "CURA TOUR 2016 THE TWILIGHT SAD"
+        Interiors and sources logo, image contains text that reads "Interiors sources"
     target_prompts:
     - >-
-        THE cure ITEMS 2016 poster, image contains text that reads "CURA ITEMS 2016 THE TWILIGHT SAD"
+        unstable and sources logo, image contains text that reads "unstable sources"
     target_codes:
     - >-
-        001257928.jpg-TOUR-to-ITEMS
+        001258236.jpg-Interiors-to-unstable

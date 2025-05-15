@@ -1,10 +1,10 @@
 -
-    input_img: FlowEdit-benchmark/001253950.jpg
+    input_img: FlowEdit-benchmark/001255955.jpg
     source_prompt: >-
-        LEGO SPINNER Pencil Topper, image contains text that reads "LEGO SPINNER Pencil Topper"
+        best friend ever custom announcement, image contains text that reads "best GAMMIE"
     target_prompts:
     - >-
-        POET SPINNER Pencil Topper, image contains text that reads "POET SPINNER Pencil Topper"
+        usage friend ever custom announcement, image contains text that reads "usage GAMMIE"
     target_codes:
     - >-
-        001253950.jpg-LEGO-to-POET
+        001255955.jpg-best-to-usage

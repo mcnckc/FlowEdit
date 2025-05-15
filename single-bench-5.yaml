@@ -1,10 +1,10 @@
 -
-    input_img: FlowEdit-benchmark/001254439.jpg
+    input_img: FlowEdit-benchmark/001256838.jpg
     source_prompt: >-
-        GYM Doll t-shirt, image contains text that reads "GYM Doll"
+        UNIVERSITY OF OXFORD logo, image contains text that reads "UNIVERSITY OF OXFORD UNIVERSITY OF _FORD"
     target_prompts:
     - >-
-        I'm Doll t-shirt, image contains text that reads "I'm Doll"
+        responsible OF OXFORD logo, image contains text that reads "responsible OF OXFORD responsible OF _FORD"
     target_codes:
     - >-
-        001254439.jpg-GYM-to-I'm
+        001256838.jpg-UNIVERSITY-to-responsible

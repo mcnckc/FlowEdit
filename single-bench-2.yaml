@@ -1,10 +1,10 @@
 -
-    input_img: FlowEdit-benchmark/001254921.jpg
+    input_img: FlowEdit-benchmark/001253797.jpg
     source_prompt: >-
-        Bright Beginnings Childcare Agency logo, image contains text that reads "**** Bright Beginnings Childcare Agency"
+        KEEP CALM AND FOCUS ON MY significant OTHER photographic print, image contains text that reads "KEEP CALM AND FOCUS ON MY SIGNFICANT OTHER"
     target_prompts:
     - >-
-        Bright extremely Childcare Agency logo, image contains text that reads "**** Bright extremely Childcare Agency"
+        KEEP CALM AND slowly ON MY significant OTHER photographic print, image contains text that reads "KEEP CALM AND slowly ON MY SIGNFICANT OTHER"
     target_codes:
     - >-
-        001254921.jpg-Beginnings-to-extremely
+        001253797.jpg-FOCUS-to-slowly
