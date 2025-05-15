@@ -6,7 +6,7 @@ dtc: 2
 v_cache_mode: "all_v"
 exps:
   -
-    exp_name: "results-200-4.5-4.5-43"
+    exp_name: "results-200-4.5-4.5-33"
     dataset_yaml: anytext-bench-200.yaml
     sampler_type: "FlowEditSD3"
     T_steps: 50
@@ -17,6 +17,6 @@ exps:
     patch_v_layers: [0]
     patch_v_steps: [0]
     n_min: 0
-    n_max: [43]
+    n_max: [33]
     seed: 179
     scene_text_edit: True
