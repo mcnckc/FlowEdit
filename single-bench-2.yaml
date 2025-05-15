@@ -1,10 +1,10 @@
 -
-    input_img: FlowEdit-benchmark/001257863.jpg
+    input_img: FlowEdit-benchmark/001256314.jpg
     source_prompt: >-
-        SAVE THE EARTH clipart, image contains text that reads "SAVE THE EARTH"
+        the cover of the magazine declare it HOUSTON, image contains text that reads "DECLAREIT HOUSTON Fashion & Entertainment May 22nd 2016"
     target_prompts:
     - >-
-        SAVE THE Gone clipart, image contains text that reads "SAVE THE Gone"
+        the cover of the magazine declare it object, image contains text that reads "DECLAREIT object Fashion & Entertainment May 22nd 2016"
     target_codes:
     - >-
-        001257863.jpg-EARTH-to-Gone
+        001256314.jpg-HOUSTON-to-object

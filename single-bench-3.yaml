@@ -1,10 +1,10 @@
 -
-    input_img: FlowEdit-benchmark/001258896.jpg
+    input_img: FlowEdit-benchmark/001259631.jpg
     source_prompt: >-
-        it's The Heart Not The Part spiral notebook, image contains text that reads "Its The Heart Not The Part"
+        GINGRICH has my VOTE 2012 sticker, image contains text that reads "GINGRICH HASMY VOTE Taking Back America"
     target_prompts:
     - >-
-        it's The Heart Am The Part spiral notebook, image contains text that reads "Its The Heart Am The Part"
+        CAMPAIGN has my VOTE 2012 sticker, image contains text that reads "CAMPAIGN HASMY VOTE Taking Back America"
     target_codes:
     - >-
-        001258896.jpg-Not-to-Am
+        001259631.jpg-GINGRICH-to-CAMPAIGN

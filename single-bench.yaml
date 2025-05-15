@@ -1,10 +1,10 @@
 -
-    input_img: FlowEdit-benchmark/001253727.jpg
+    input_img: FlowEdit-benchmark/001258210.jpg
     source_prompt: >-
-        a woman in black leather pants and a black top with the words asos discover fashion online, image contains text that reads "asos discover fashion online"
+        micro sd card with 2GB memory card, image contains text that reads "micro 2GB Store No micro"
     target_prompts:
     - >-
-        a woman in black leather pants and a black top with the words asos discover fashion Below, image contains text that reads "asos discover fashion Below"
+        route sd card with 2GB memory card, image contains text that reads "route 2GB Store No route"
     target_codes:
     - >-
-        001253727.jpg-online-to-Below
+        001258210.jpg-micro-to-route

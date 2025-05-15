@@ -1,10 +1,10 @@
 -
-    input_img: FlowEdit-benchmark/001254579.jpg
+    input_img: FlowEdit-benchmark/001253950.jpg
     source_prompt: >-
-        96 Homemade Food Gifts in under 1 hour, image contains text that reads "96 Homemade Food Gifts in under hour"
+        LEGO SPINNER Pencil Topper, image contains text that reads "LEGO SPINNER Pencil Topper"
     target_prompts:
     - >-
-        In Homemade Food Gifts in under 1 hour, image contains text that reads "In Homemade Food Gifts in under hour"
+        POET SPINNER Pencil Topper, image contains text that reads "POET SPINNER Pencil Topper"
     target_codes:
     - >-
-        001254579.jpg-96-to-In
+        001253950.jpg-LEGO-to-POET
