@@ -1,10 +1,10 @@
 -
-    input_img: FlowEdit-benchmark/001256066.jpg
+    input_img: FlowEdit-benchmark/001254579.jpg
     source_prompt: >-
-        a smiley face WITH the words, obsessed with awards, image contains text that reads "OBSESS WITH"
+        96 Homemade Food Gifts in under 1 hour, image contains text that reads "96 Homemade Food Gifts in under hour"
     target_prompts:
     - >-
-        a smiley face Trace the words, obsessed with awards, image contains text that reads "OBSESS Trace"
+        In Homemade Food Gifts in under 1 hour, image contains text that reads "In Homemade Food Gifts in under hour"
     target_codes:
     - >-
-        001256066.jpg-WITH-to-Trace
+        001254579.jpg-96-to-In

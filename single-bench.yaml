@@ -1,10 +1,10 @@
 -
-    input_img: FlowEdit-benchmark/001257601.jpg
+    input_img: FlowEdit-benchmark/001253727.jpg
     source_prompt: >-
-        CALL of duty MODERN WARFARE ps4, image contains text that reads "CALL MODERN WARFARE 18"
+        a woman in black leather pants and a black top with the words asos discover fashion online, image contains text that reads "asos discover fashion online"
     target_prompts:
     - >-
-        CALL of duty DESIRED WARFARE ps4, image contains text that reads "CALL DESIRED WARFARE 18"
+        a woman in black leather pants and a black top with the words asos discover fashion Below, image contains text that reads "asos discover fashion Below"
     target_codes:
     - >-
-        001257601.jpg-MODERN-to-DESIRED
+        001253727.jpg-online-to-Below

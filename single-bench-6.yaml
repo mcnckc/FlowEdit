@@ -1,10 +1,10 @@
 -
-    input_img: FlowEdit-benchmark/001253877.jpg
+    input_img: FlowEdit-benchmark/001254640.jpg
     source_prompt: >-
-        ellie Beth logo, image contains text that reads "Ellic Beth"
+        Who are the FASTEST man and woman in the world?, image contains text that reads "Who are the FASTEST man & woman"
     target_prompts:
     - >-
-        ellie aged logo, image contains text that reads "Ellic aged"
+        Who are Burn FASTEST man and woman in Burn world?, image contains text that reads "Who are Burn FASTEST man & woman"
     target_codes:
     - >-
-        001253877.jpg-Beth-to-aged
+        001254640.jpg-the-to-Burn
