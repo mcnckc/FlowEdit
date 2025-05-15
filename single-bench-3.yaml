@@ -1,10 +1,10 @@
 -
-    input_img: FlowEdit-benchmark/001259631.jpg
+    input_img: FlowEdit-benchmark/001257928.jpg
     source_prompt: >-
-        GINGRICH has my VOTE 2012 sticker, image contains text that reads "GINGRICH HASMY VOTE Taking Back America"
+        THE cure TOUR 2016 poster, image contains text that reads "CURA TOUR 2016 THE TWILIGHT SAD"
     target_prompts:
     - >-
-        CAMPAIGN has my VOTE 2012 sticker, image contains text that reads "CAMPAIGN HASMY VOTE Taking Back America"
+        THE cure ITEMS 2016 poster, image contains text that reads "CURA ITEMS 2016 THE TWILIGHT SAD"
     target_codes:
     - >-
-        001259631.jpg-GINGRICH-to-CAMPAIGN
+        001257928.jpg-TOUR-to-ITEMS

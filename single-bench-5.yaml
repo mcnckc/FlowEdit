@@ -1,10 +1,10 @@
 -
-    input_img: FlowEdit-benchmark/001255859.jpg
+    input_img: FlowEdit-benchmark/001254439.jpg
     source_prompt: >-
-        MARIAH POWERED BY CAFFEINE round sticker, image contains text that reads "MARIAH POWERED BY CAFFEINE"
+        GYM Doll t-shirt, image contains text that reads "GYM Doll"
     target_prompts:
     - >-
-        MARIAH POWERED BY PROTEINS round sticker, image contains text that reads "MARIAH POWERED BY PROTEINS"
+        I'm Doll t-shirt, image contains text that reads "I'm Doll"
     target_codes:
     - >-
-        001255859.jpg-CAFFEINE-to-PROTEINS
+        001254439.jpg-GYM-to-I'm
