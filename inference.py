@@ -60,7 +60,10 @@ if __name__ == "__main__":
     print("LOADED TO GPU")
     for exp_id, exp_dict in enumerate(cfg.exps):
         for tar_guidance_scale in exp_dict["tar_guidance_scale"]:
-            src_scales = list(set(exp_dict["src_guidance_scale"] + [tar_guidance_scale]))
+            if exp_dict['add_eq']:
+                src_scales = list(set(exp_dict["src_guidance_scale"] + [tar_guidance_scale]))
+            else:
+                src_scales = exp_dict["src_guidance_scale"]
             for src_guidance_scale in src_scales:
                 if src_guidance_scale > tar_guidance_scale:
                     continue

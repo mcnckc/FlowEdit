@@ -11,6 +11,7 @@ exps:
     sampler_type: "FlowEditSD3"
     T_steps: 50
     n_avg: 1
+    add_eq: True
     src_guidance_scale: []
     tar_guidance_scale: [6.5]
     patch_v_layers: [0]
