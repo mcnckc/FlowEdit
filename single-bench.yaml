@@ -1,10 +1,10 @@
 -
-    input_img: FlowEdit-benchmark/001258210.jpg
+    input_img: FlowEdit-benchmark/001258644.jpg
     source_prompt: >-
-        micro sd card with 2GB memory card, image contains text that reads "micro 2GB Store No micro"
+        the NOMAD 5 pack, image contains text that reads "THEI NOMAD 5PACK)"
     target_prompts:
     - >-
-        route sd card with 2GB memory card, image contains text that reads "route 2GB Store No route"
+        the Ruth 5 pack, image contains text that reads "THEI Ruth 5PACK)"
     target_codes:
     - >-
-        001258210.jpg-micro-to-route
+        001258644.jpg-NOMAD-to-Ruth
