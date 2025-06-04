@@ -1,10 +1,10 @@
 -
-    input_img: FlowEdit-benchmark/001253902.jpg
+    input_img: friends/22.jpg
     source_prompt: >-
-        FIVE HALLOWEEN KNIT PATTERNS, image contains text that reads "FIVE HALLOWEEN KNIT PATTERNS"
+        A guy at a party wearing t-shirt with a print, and text "DON'T STRESS" written around it, image contains text that reads "DON'T STRESS"
     target_prompts:
     - >-
-        FIVE HALLOWEEN shell PATTERNS, image contains text that reads "FIVE HALLOWEEN shell PATTERNS"
+        A guy at a party wearing t-shirt with a print, and text "DON'T DANILA" written around it, image contains text that reads "DON'T DANILA"
     target_codes:
     - >-
-        001253902.jpg-KNIT-to-shell
+        22.jpg-STRESS-to-DANILA
