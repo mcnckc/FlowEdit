@@ -1,5 +1,5 @@
 -
-    input_img: friends/22.jpg
+    input_img: friends/22-1.JPG
     source_prompt: >-
         A guy at a party wearing t-shirt with a print, and text "DON'T STRESS" written around it, image contains text that reads "DON'T STRESS"
     target_prompts:
