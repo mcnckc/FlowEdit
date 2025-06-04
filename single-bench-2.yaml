@@ -1,10 +1,10 @@
 -
-    input_img: FlowEdit-benchmark/001253797.jpg
+    input_img: friends/22-1.JPG
     source_prompt: >-
-        KEEP CALM AND FOCUS ON MY significant OTHER photographic print, image contains text that reads "KEEP CALM AND FOCUS ON MY SIGNFICANT OTHER"
+        A guy at a party wearing t-shirt with a print, and text "DON'T STRESS" written around it, image contains text that reads "DON'T STRESS"
     target_prompts:
     - >-
-        KEEP CALM AND slowly ON MY significant OTHER photographic print, image contains text that reads "KEEP CALM AND slowly ON MY SIGNFICANT OTHER"
+        A guy at a party wearing t-shirt with a print, and text "DON'T SACL" written around it, image contains text that reads "DON'T SACL"
     target_codes:
     - >-
-        001253797.jpg-FOCUS-to-slowly
+        22.jpg-STRESS-to-SACL
