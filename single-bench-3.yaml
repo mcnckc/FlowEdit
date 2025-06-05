@@ -1,5 +1,5 @@
 -
-    input_img: FlowEdit-benchmark/001258236.jpg
+    input_img: friends/23-1.jpg
     source_prompt: >-
         letters "FEMS" hanging from a rope at the party, image contains text that reads "FEMS"
     target_prompts:
@@ -7,4 +7,4 @@
         letters "PIMS" hanging from a rope at the party, image contains text that reads "PIMS"
     target_codes:
     - >-
-        001258236.jpg-Interiors-to-unstable
+        23-1.jpg-FEMS-to-PIMS
