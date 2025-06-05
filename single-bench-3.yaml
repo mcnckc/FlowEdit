@@ -1,10 +1,10 @@
 -
     input_img: FlowEdit-benchmark/001258236.jpg
     source_prompt: >-
-        Interiors and sources logo, image contains text that reads "Interiors sources"
+        letters "FEMS" hanging from a rope at the party, image contains text that reads "FEMS"
     target_prompts:
     - >-
-        unstable and sources logo, image contains text that reads "unstable sources"
+        letters "PIMS" hanging from a rope at the party, image contains text that reads "PIMS"
     target_codes:
     - >-
         001258236.jpg-Interiors-to-unstable
