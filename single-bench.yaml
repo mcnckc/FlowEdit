@@ -1,10 +1,10 @@
 -
-    input_img: friends/22-1.JPG
+    input_img: friends/22-2.JPG
     source_prompt: >-
-        A guy at a party wearing t-shirt with a print, and text "DON'T STRESS" written around it, image contains text that reads "DON'T STRESS"
+        t-shirt with a print, and text "DON'T STRESS" written around it, image contains text that reads "DON'T STRESS"
     target_prompts:
     - >-
-        A guy at a party wearing t-shirt with a print, and text "DON'T DANILA" written around it, image contains text that reads "DON'T DANILA"
+        t-shirt with a print, and text "DON'T DANILA" written around it, image contains text that reads "DON'T DANILA"
     target_codes:
     - >-
         22.jpg-STRESS-to-DANILA
