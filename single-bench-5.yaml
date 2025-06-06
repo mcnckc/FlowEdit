@@ -1,10 +1,10 @@
 -
-    input_img: FlowEdit-benchmark/001256838.jpg
+    input_img: friends/25-1.jpg
     source_prompt: >-
-        UNIVERSITY OF OXFORD logo, image contains text that reads "UNIVERSITY OF OXFORD UNIVERSITY OF _FORD"
+        girl standing next to a wall of British Embassy, image contains text that reads "British Embassy"
     target_prompts:
     - >-
-        responsible OF OXFORD logo, image contains text that reads "responsible OF OXFORD responsible OF _FORD"
+        girl standing next to a wall of Wagner Center, image contains text that reads "Wagner Center"
     target_codes:
     - >-
-        001256838.jpg-UNIVERSITY-to-responsible
+        25-1.jpg-Embassy-to-Wagner
