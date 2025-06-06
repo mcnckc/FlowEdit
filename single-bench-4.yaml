@@ -1,10 +1,10 @@
 -
-    input_img: FlowEdit-benchmark/001255955.jpg
+    input_img: friends/24-1.jpg
     source_prompt: >-
-        best friend ever custom announcement, image contains text that reads "best GAMMIE"
+        tatoo that reads "13/69" on man's neck, image contains text that reads "13/69"
     target_prompts:
     - >-
-        usage friend ever custom announcement, image contains text that reads "usage GAMMIE"
+        tatoo that reads "SEPS" on man's neck, image contains text that reads "SEPS"
     target_codes:
     - >-
-        001255955.jpg-best-to-usage
+        001255955.jpg-1369-to-SEPS
