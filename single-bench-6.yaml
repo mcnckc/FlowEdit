@@ -1,10 +1,10 @@
 -
-    input_img: FlowEdit-benchmark/001255738.jpg
+    input_img: friends/slava-1.jpg
     source_prompt: >-
-        KEEP CALM BY FOCUSING ON SUMMER, image contains text that reads "KEEP CALM BY FOCUSING ON SUMMER"
+        the text "СЛАВА РУС" is written in chalk on the pavement, image contains text that reads "СЛАВА РУС"
     target_prompts:
     - >-
-        KEEP CALM BY visible ON SUMMER, image contains text that reads "KEEP CALM BY visible ON SUMMER"
+        the text "НЕ ПУСКАТЬ" is written in chalk on the pavement, image contains text that reads "НЕ ПУСКАТЬ"
     target_codes:
     - >-
-        001255738.jpg-FOCUSING-to-visible
+        slava-1.jpg-slava-to-nepuskat
