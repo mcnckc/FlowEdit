@@ -4,7 +4,7 @@
         tatoo that reads "13/69" on man's neck, image contains text that reads "13/69"
     target_prompts:
     - >-
-        tatoo that reads "SEPS" on man's neck, image contains text that reads "SEPS"
+        tatoo that reads "GUS" on man's neck, image contains text that reads "GUS"
     target_codes:
     - >-
-        001255955.jpg-1369-to-SEPS
+        001255955.jpg-1369-to-GUS
