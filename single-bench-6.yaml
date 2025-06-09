@@ -1,10 +1,10 @@
 -
     input_img: friends/slava-1.jpg
     source_prompt: >-
-        the text "СЛАВА РУС" is written in chalk on the pavement, image contains text that reads "СЛАВА РУС"
+        the text "CVABA PYC" is written in chalk on the pavement, image contains text that reads "CVABA PYC"
     target_prompts:
     - >-
-        the text "НЕ ПУСКАТЬ" is written in chalk on the pavement, image contains text that reads "НЕ ПУСКАТЬ"
+        the text "NE PUSKAT" is written in chalk on the pavement, image contains text that reads "NE PUSKAT"
     target_codes:
     - >-
         slava-1.jpg-slava-to-nepuskat
