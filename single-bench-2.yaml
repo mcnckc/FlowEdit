@@ -4,7 +4,7 @@
         a guy sits in front of the cafe called "Mak.by", image contains text that reads "Mak.by"
     target_prompts:
     - >-
-        a guy sits in front of the cafe called "Sacl", image contains text that reads "Sacl"
+        a guy sits in front of the cafe called "Sacl.by", image contains text that reads "Sacl.by"
     target_codes:
     - >-
         28-1.jpg-mak-to-SACL
